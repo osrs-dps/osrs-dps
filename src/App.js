@@ -250,6 +250,21 @@ function App() {
             </div>
         </div>
 
+        <div class="checkbox-wrapper">
+            <div class="">
+                <label class="checkbox-label" for="wild">Wilderness</label>
+                <input class="checkbox" type="checkbox" id="wild"></input>
+            </div>
+            <div class="">
+                <label class="checkbox-label" for="kandarin">Kandarin</label>
+                <input class="checkbox" type="checkbox" id="kandarin"></input>
+            </div>
+            <div class="">
+                <label class="checkbox-label" for="dwh">Dragon warhammer</label>
+                <input class="checkbox" type="checkbox" id="dwh"></input>
+            </div>
+        </div>
+
         <div className="monster-wrapper">
             <select id="att-pot" className="">
                 <option value="">Monster</option>

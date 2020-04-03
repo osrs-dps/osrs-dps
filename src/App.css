@@ -33,3 +33,16 @@
   margin-left: 100px;
   margin-top: 25px;
 }
+
+.checkbox-wrapper {
+  margin-left: 100px;
+  margin-top: 25px;
+}
+.checkbox-label {
+  margin-bottom: 5px;
+}
+
+.checkbox {
+  vertical-align: middle;
+  margin-left: 5px;
+}
