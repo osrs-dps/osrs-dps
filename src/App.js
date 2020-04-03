@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import weaponSlot from './data/1h_weapon_slot.json'
 import ammoSlot from './data/ammo_blessing.json'
@@ -15,17 +15,20 @@ import ringSlot from './data/ring_slot.json'
 import 'bootstrap/dist/css/bootstrap.css';
 import Select from 'react-select';
 
-const weaponSlotOptions = parseJSONSelector(weaponSlot);
-const ammoSlotOptions = parseJSONSelector(ammoSlot);
-const headSlotOptions = parseJSONSelector(headSlot);
-const capeSlotOptions = parseJSONSelector(capeSlot);
-const amuletSlotOptions = parseJSONSelector(amuletSlot);
-const chestSlotOptions = parseJSONSelector(chestSlot);
-const legsSlotOptions = parseJSONSelector(legsSlot);
-const shieldSlotOptions = parseJSONSelector(shieldSlot);
-const glovesSlotOptions = parseJSONSelector(glovesSlot);
-const bootsSlotOptions = parseJSONSelector(bootsSlot);
-const ringSlotOptions = parseJSONSelector(ringSlot);
+const slotOptions = {
+    weapon: parseJSONSelector(weaponSlot),
+    ammo: parseJSONSelector(ammoSlot),
+    head: parseJSONSelector(headSlot),
+    cape: parseJSONSelector(capeSlot),
+    amulet: parseJSONSelector(amuletSlot),
+    chest: parseJSONSelector(chestSlot),
+    legs: parseJSONSelector(legsSlot),
+    shield: parseJSONSelector(shieldSlot),
+    gloves: parseJSONSelector(glovesSlot),
+    boots: parseJSONSelector(bootsSlot),
+    ring: parseJSONSelector(ringSlot),
+};
+
 
 function parseJSONSelector(slot){
     var ret = []
@@ -36,109 +39,39 @@ function parseJSONSelector(slot){
 }
 
 function App() {
+    const [equips, setEquips] = useState({
+        weapon: null,
+        ammo: null,
+        head: null,
+        cape: null,
+        amulet: null,
+        chest: null,
+        legs: null,
+        shield: null,
+        gloves: null,
+        boots: null,
+        ring: null,
+    });
+
+    const onEquipChange = (itemId, type) => {
+        setEquips({...equips, [`${type}`]: itemId});
+    };
 
   return (
     <div className="App">
         <div className="equipment-wrapper">
-            <div className="margin-tb">
-                <Select 
-                    id="weapon" 
-                    className="equipment-slot"
-                    placeholder="Select Weapon..."
-                    options={weaponSlotOptions}
-                />
-            </div>
-            
-            <div className="margin-tb">
-                <Select 
-                    id="ammo" 
-                    className="equipment-slot"
-                    placeholder="Select Ammo..."
-                    options={ammoSlotOptions}
-                />
-            </div>
-
-            <div className="margin-tb">
-                <Select 
-                    id="head" 
-                    className="equipment-slot"
-                    placeholder="Select Head..."
-                    options={headSlotOptions}
-                />
-            </div>
-
-            <div className="margin-tb">
-                <Select 
-                    id="cape" 
-                    className="equipment-slot"
-                    placeholder="Select Cape..."
-                    options={capeSlotOptions}
-                />
-            </div>
-
-            <div className="margin-tb">
-                <Select 
-                    id="amulet" 
-                    className="equipment-slot"
-                    placeholder="Select Amulet..."
-                    options={amuletSlotOptions}
-                />
-            </div>
-
-            <div className="margin-tb">
-                <Select 
-                    id="chest" 
-                    className="equipment-slot"
-                    placeholder="Select Chest..."
-                    options={chestSlotOptions}
-                />
-            </div>
-
-            <div className="margin-tb">
-                <Select 
-                    id="legs" 
-                    className="equipment-slot"
-                    placeholder="Select Legs..."
-                    options={legsSlotOptions}
-                />
-            </div>
-
-            <div className="margin-tb">
-                <Select 
-                    id="shield" 
-                    className="equipment-slot"
-                    placeholder="Select Shield..."
-                    options={shieldSlotOptions}
-                />
-            </div>
-
-            <div className="margin-tb">
-                <Select 
-                    id="gloves" 
-                    className="equipment-slot"
-                    placeholder="Select Gloves..."
-                    options={glovesSlotOptions}
-                />
-            </div>
-
-            <div className="margin-tb">
-                <Select 
-                    id="boots" 
-                    className="equipment-slot"
-                    placeholder="Select Boots..."
-                    options={bootsSlotOptions}
-                />
-            </div>
-
-            
-            <div className="margin-tb">
-                <Select 
-                    id="ring" 
-                    className="equipment-slot"
-                    placeholder="Select Ring..."
-                    options={ringSlotOptions}
-                />
-            </div>
+            {Object.keys(slotOptions).map(type => (
+                <div key={type} className="margin-tb">
+                    <Select
+                        isClearable
+                        className="equipment-slot"
+                        placeholder={`Select ${type}...`}
+                        options={slotOptions[type]}
+                        value={equips[type]}
+                        onChange={itemId => onEquipChange(itemId, type)}
+                    />
+                </div>
+            ))}
         </div>
 
         <div className="stats-wrapper">
