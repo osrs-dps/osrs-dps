@@ -142,11 +142,11 @@ function App() {
         </div>
 
         <div className="stats-wrapper">
-            <div calss="margin-tb">
+            <div className="margin-tb">
                 <label className="stat-label" for="rsn">RSN</label>
                 <input className="stat-input" type="text" id="rsn"></input>
             </div>
-            <div calss="margin-tb">
+            <div className="margin-tb">
                 <label className="stat-label" for="att">Attack</label>
                 <input className="stat-input" type="number" id="attack"></input>
                 <select id="att-pot" className="stat-input">
@@ -158,7 +158,7 @@ function App() {
                     <option value="">hat</option>
                 </select>
             </div>
-            <div calss="margin-tb">
+            <div className="margin-tb">
                 <label className="stat-label" for="str">Strength</label>
                 <input className="stat-input" type="number" id="str"></input>
                 <select id="att-pot" className="stat-input">
@@ -170,7 +170,7 @@ function App() {
                     <option value="">hat</option>
                 </select>
             </div>
-            <div calss="margin-tb">
+            <div className="margin-tb">
                 <label className="stat-label" for="def">Defence</label>
                 <input className="stat-input" type="number" id="def"></input>
                 <select id="att-pot" className="stat-input">
@@ -182,7 +182,7 @@ function App() {
                     <option value="">hat</option>
                 </select>
             </div>
-            <div calss="margin-tb">
+            <div className="margin-tb">
                 <label className="stat-label" for="magic">Magic</label>
                 <input className="stat-input" type="number" id="magic"></input>
                 <select id="att-pot" className="stat-input">
@@ -194,7 +194,7 @@ function App() {
                     <option value="">hat</option>
                 </select>
             </div>
-            <div calss="margin-tb">
+            <div className="margin-tb">
                 <label className="stat-label" for="range">Ranged</label>
                 <input className="stat-input" type="number" id="range"></input>
                 <select id="att-pot" className="stat-input">
@@ -206,28 +206,79 @@ function App() {
                     <option value="">hat</option>
                 </select>
             </div>
-            <div calss="margin-tb">
+            <div className="margin-tb">
                 <label className="stat-label" for="hp">Hitpoints</label>
                 <input className="stat-input" type="number" id="hp"></input>
             </div>
-            <div calss="margin-tb">
+            <div className="margin-tb">
                 <label className="stat-label" for="prayer">Prayer</label>
                 <input className="stat-input" type="number" id="prayer"></input>
             </div>
         </div>
 
-        <div class="checkbox-wrapper">
-            <div class="">
-                <label class="checkbox-label" for="wild">Wilderness</label>
-                <input class="checkbox" type="checkbox" id="wild"></input>
+        <div className="checkbox-wrapper">
+            <div className="">
+                <label className="checkbox-label" for="wild">Wilderness</label>
+                <input className="checkbox" type="checkbox" id="wild"></input>
             </div>
-            <div class="">
-                <label class="checkbox-label" for="kandarin">Kandarin</label>
-                <input class="checkbox" type="checkbox" id="kandarin"></input>
+            <div className="">
+                <label className="checkbox-label" for="kandarin">Kandarin</label>
+                <input className="checkbox" type="checkbox" id="kandarin"></input>
             </div>
-            <div class="">
-                <label class="checkbox-label" for="dwh">Dragon warhammer</label>
-                <input class="checkbox" type="checkbox" id="dwh"></input>
+            <div className="">
+                <label className="checkbox-label" for="dwh">Dragon warhammer</label>
+                <input className="checkbox" type="checkbox" id="dwh"></input>
+            </div>
+        </div>
+
+        <div className="stats">
+            <div>
+                <div className="stat-left">
+                    Max hit
+                </div>
+                <div className="stat-right">
+                    1000
+                </div>
+            </div>
+            <div>
+                <div className="stat-left">
+                    Spec max hit
+                </div>
+                <div className="stat-right">
+                    69420
+                </div>
+            </div>
+            <div>
+                <div className="stat-left">
+                    Spec accuracy 
+                </div>
+                <div className="stat-right">
+                    420%
+                </div>
+            </div>
+            <div>
+                <div className="stat-left">
+                    accuracy
+                </div>
+                <div className="stat-right">
+                    69%
+                </div>
+            </div>
+            <div>
+                <div className="stat-left">
+                    Strength bonus
+                </div>
+                <div className="stat-right">
+                    17 million
+                </div>
+            </div>
+            <div>
+                <div className="stat-left stat-bottom">
+                    Accuracy bonus
+                </div>
+                <div className="stat-right stat-bottom">
+                    6
+                </div>
             </div>
         </div>
 
