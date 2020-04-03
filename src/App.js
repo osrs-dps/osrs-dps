@@ -1,76 +1,42 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
+import weaponSlot from './data/1h_weapon_slot.json'
+import ammoSlot from './data/ammo_blessing.json'
+import headSlot from './data/head_slot.json'
+import capeSlot from './data/cape_slot.json'
+import amuletSlot from './data/neck_slot.json'
+import chestSlot from './data/chest_slot.json'
+import legsSlot from './data/leg_slot.json'
+import shieldSlot from './data/shield_slot.json'
+import glovesSlot from './data/hand_slot.json'
+import bootsSlot from './data/boot_slot.json'
+import ringSlot from './data/ring_slot.json'
+
 import 'bootstrap/dist/css/bootstrap.css';
 import Select from 'react-select';
 
-const weaponSlotOptions = [
-    {value: 'ancestralHat', label: 'Ancestral Hat'},
-    {value: 'robinHoodHat', label: 'Robin Hood Hat'},
-    {value: 'serpentineHelm', label: 'Serpentine Helm'},
-];
+const weaponSlotOptions = parseJSONSelector(weaponSlot);
+const ammoSlotOptions = parseJSONSelector(ammoSlot);
+const headSlotOptions = parseJSONSelector(headSlot);
+const capeSlotOptions = parseJSONSelector(capeSlot);
+const amuletSlotOptions = parseJSONSelector(amuletSlot);
+const chestSlotOptions = parseJSONSelector(chestSlot);
+const legsSlotOptions = parseJSONSelector(legsSlot);
+const shieldSlotOptions = parseJSONSelector(shieldSlot);
+const glovesSlotOptions = parseJSONSelector(glovesSlot);
+const bootsSlotOptions = parseJSONSelector(bootsSlot);
+const ringSlotOptions = parseJSONSelector(ringSlot);
 
-const ammoSlotOptions = [
-    {value: 'ancestralHat', label: 'Ancestral Hat'},
-    {value: 'robinHoodHat', label: 'Robin Hood Hat'},
-    {value: 'serpentineHelm', label: 'Serpentine Helm'},
-];
-
-
-const headSlotOptions = [
-    {value: 'ancestralHat', label: 'Ancestral Hat'},
-    {value: 'robinHoodHat', label: 'Robin Hood Hat'},
-    {value: 'serpentineHelm', label: 'Serpentine Helm'},
-];
-
-const capeSlotOptions = [
-    {value: 'ancestralHat', label: 'Ancestral Hat'},
-    {value: 'robinHoodHat', label: 'Robin Hood Hat'},
-    {value: 'serpentineHelm', label: 'Serpentine Helm'},
-];
-
-const amuletSlotOptions = [
-    {value: 'ancestralHat', label: 'Ancestral Hat'},
-    {value: 'robinHoodHat', label: 'Robin Hood Hat'},
-    {value: 'serpentineHelm', label: 'Serpentine Helm'},
-];
-
-const chestSlotOptions = [
-    {value: 'ancestralHat', label: 'Ancestral Hat'},
-    {value: 'robinHoodHat', label: 'Robin Hood Hat'},
-    {value: 'serpentineHelm', label: 'Serpentine Helm'},
-];
-
-const legsSlotOptions = [
-    {value: 'ancestralHat', label: 'Ancestral Hat'},
-    {value: 'robinHoodHat', label: 'Robin Hood Hat'},
-    {value: 'serpentineHelm', label: 'Serpentine Helm'},
-];
-
-const shieldSlotOptions = [
-    {value: 'ancestralHat', label: 'Ancestral Hat'},
-    {value: 'robinHoodHat', label: 'Robin Hood Hat'},
-    {value: 'serpentineHelm', label: 'Serpentine Helm'},
-];
-
-const glovesSlotOptions = [
-    {value: 'ancestralHat', label: 'Ancestral Hat'},
-    {value: 'robinHoodHat', label: 'Robin Hood Hat'},
-    {value: 'serpentineHelm', label: 'Serpentine Helm'},
-];
-
-const bootsSlotOptions = [
-    {value: 'ancestralHat', label: 'Ancestral Hat'},
-    {value: 'robinHoodHat', label: 'Robin Hood Hat'},
-    {value: 'serpentineHelm', label: 'Serpentine Helm'},
-];
-
-const ringSlotOptions = [
-    {value: 'ancestralHat', label: 'Ancestral Hat'},
-    {value: 'robinHoodHat', label: 'Robin Hood Hat'},
-    {value: 'serpentineHelm', label: 'Serpentine Helm'},
-];
+function parseJSONSelector(slot){
+    var ret = []
+    for(var i = 0 ; i < slot.length ; i++){
+        ret[i] = {value: slot[i].Name, label: slot[i].Name}
+    }
+    return ret;
+}
 
 function App() {
+
   return (
     <div className="App">
         <div className="equipment-wrapper">
@@ -82,7 +48,7 @@ function App() {
                     options={weaponSlotOptions}
                 />
             </div>
-
+            
             <div className="margin-tb">
                 <Select 
                     id="ammo" 
