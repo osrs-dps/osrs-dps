@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import './App.css';
 import slotData from './slot_data';
+import monsterData from './data/monsters.json';
 import _ from 'lodash';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import Select from 'react-select';
+
+const weaponTicks = 4; //Placeholder until weapon tickrate is added to data
 
 const SLOT_NAMES = [
     'weapon',
@@ -20,19 +23,28 @@ const SLOT_NAMES = [
     'ring',
 ];
 
-
-
 const STR_PRAYERS = [
     {value: 1.23, label: "Piety"},
     {value: 1.18, label: "Chivalry"},
     {value: 1.15, label: "Ultimate Strength"},
-    {value: 1.11, label: "Superhuman Strength"},
-    {value: 1.05, label: "Burst of Strength"},
 ];
 
 const STR_POTIONS = [
-    {value: "strengthPotion", label: "Strength Potion"},
     {value: "superStrengthPotion", label: "Super Strength Potion"},
+    {value: "strengthPotion", label: "Strength Potion"},
+    {value: "overload(+)", label: "Overload (+)"}
+];
+
+const ATT_PRAYERS = [
+    {value: 1.20, label: "Piety"},
+    {value: 1.15, label: "Chivalry"},
+    {value: 1.15000001, label: "Incredible Reflexes"}, 
+    //if the values are the same both will show up as selected when one is - idk how to fix
+];
+
+const ATT_POTIONS = [
+    {value: "superAttackPotion", label: "Super Attack Potion"},
+    {value: "attackPotion", label: "Attack Potion"},
     {value: "overload(+)", label: "Overload (+)"}
 ];
 
@@ -40,6 +52,7 @@ const slotOptions = _.reduce(SLOT_NAMES, (acc, key) => {
     return {...acc, [key]: parseJSONSelector(slotData[key])};
 }, {});
 
+const monsterOptions = parseJSONSelector(monsterData);
 
 function parseJSONSelector(slot){
     var ret = []
@@ -63,15 +76,22 @@ function App() {
         setEquips({...equips, [`${type}`]: item});
     };
 
-    const totalStrBonus = _.reduce(SLOT_NAMES, (total, key) => {
-        return total + (equips[key] ? parseInt(equips[key].str) : 0);
-    }, 0);
-
     const onLevelChange = (level, type) => {
         setLevels({...levels, [`${type}`]: level})
     };
-
-
+    const [levels, setLevels] = useState({
+        attack: 1,
+        strength: 1,
+        defence: 1,
+        magic: 1,
+        ranged: 1,
+        hitpoints: 10,
+        prayer: 1
+    });
+    //########## Strength Calcs ##########
+    const totalStrBonus = _.reduce(SLOT_NAMES, (total, key) => {
+        return total + (equips[key] ? parseInt(equips[key].str) : 0);
+    }, 0);
 
     const onStrPotionChange = (potion) => {
         let base = 0;
@@ -90,16 +110,6 @@ function App() {
         }
         setStrBonuses({...strBonuses, [`potionBase`]: base, [`potionMultiplier`]: multiplier});
     };
-
-    const [levels, setLevels] = useState({
-        attack: 1,
-        strength: 1,
-        defence: 1,
-        magic: 1,
-        ranged: 1,
-        hitpoints: 10,
-        prayer: 1
-    });
 
     const [strBonuses, setStrBonuses] = useState({
         potionBase: 0,
@@ -120,7 +130,75 @@ function App() {
 
     const maxHit = baseDamage * 1;
     //todo: dharoks, obsidian, special attack bonuses
+
+    //########## Attack Calcs ##########
+    const totalAttBonus = _.reduce(SLOT_NAMES, (total, key) => {
+        return total + (equips[key] ? parseInt(equips[key].slashatt) : 0);
+    }, 0);
+    //change slashatt for other styles
+
+    const onAttPotionChange = (potion) => {
+        let base = 0;
+        let multiplier = 0;
+        if(potion === "attackPotion"){
+            base = 3;
+            multiplier = 0.1;
+        }
+        else if(potion === "superAttackPotion"){
+            base = 5;
+            multiplier = 0.15;        
+        }
+        else if(potion === "overload(+)"){
+            base = 6;
+            multiplier = 0.16;
+        }
+        setAttBonuses({...attBonuses, [`potionBase`]: base, [`potionMultiplier`]: multiplier});
+    };
+
+    const [attBonuses, setAttBonuses] = useState({
+        potionBase: 0,
+        potionMultiplier: 0,
+        prayer: 1,
+        other: 1,
+        style: 0
+    })
     
+    const attPotionBonus = attBonuses.potionBase + Math.floor(levels.attack*attBonuses.potionMultiplier);
+
+    const effectiveAtt = Math.floor(((levels.attack + attPotionBonus) * attBonuses.prayer * 1) + 3 + 8);
+    //todo: attack style, void, slayer helm, void
+
+    const maxAttRoll = effectiveAtt * (totalAttBonus + 64) * 1;
+    //salve, slayer, arclight, dchb, dhl, wildy weapons, tbow
+
+    //########## Enemy Defence Calcs ##########
+
+    const [monster, setMonster] = useState({
+        Name: null,
+        magicLvl: 0,
+        defenseLvl : 0,
+        stabDef : 0,
+        slashDef : 0,
+        crushDef : 0,
+        magicDef : 0,
+        rangeDef : 0
+    })
+
+    const onMonsterChange = (monsterId) => {
+        let monster = null;
+        if(monsterId) {
+            monster = _.find(monsterData, {Name: monsterId.value});
+        }
+        setMonster(monster);
+    };
+
+    const effectiveDefence = monster.defenseLvl + 9;
+    const maxDefenceRoll = effectiveDefence * (monster.slashDef + 64);
+
+    const hitChance = maxAttRoll > maxDefenceRoll ? 1 - (maxDefenceRoll + 2) / (2 * (maxAttRoll + 1)):
+                                                    maxAttRoll / (2 * (maxDefenceRoll + 1));
+    
+    const dps = hitChance * (maxHit / 2) / (weaponTicks * 0.6);
   return (
     <div className="App">
         <div className="equipment-wrapper">
@@ -136,7 +214,18 @@ function App() {
                     />
                 </div>
             ))}
+
+            <Select
+                isClearable
+                className="equipment-slot"
+                placeholder={`Select Enemy`}
+                options={monsterOptions}
+                value={monsterOptions && monsterOptions.Name}
+                onChange={monsterId => onMonsterChange(monsterId)}
+            />
         </div>
+
+
 
         <div className="stats-wrapper">
             <div className="margin-tb">
@@ -145,16 +234,25 @@ function App() {
             </div>
             <div className="margin-tb">
                 <label className="stat-label" htmlFor="att">Attack</label>
-                <input className="stat-input" type="number" id="attack"></input>
+                <input className="stat-input" 
+                    type="number" 
+                    id="sttack"
+                    value={levels.attack}
+                    onChange={level => onLevelChange(parseInt(level.target.value), "attack")}
+                />
                 <Select
                     isClearable
                     className="stat-input"
                     placeholder={`Potion`}
+                    options={ATT_POTIONS}
+                    onChange={potion => onAttPotionChange(potion && potion.value)}
                     />
                 <Select
                     isClearable
                     className="stat-input"
                     placeholder={`Prayer`}
+                    options={ATT_PRAYERS}
+                    onChange={prayer => setAttBonuses({...attBonuses, [`prayer`]:prayer ? prayer.value : 1})}
                 />
             </div>
             <div className="margin-tb">
@@ -163,7 +261,8 @@ function App() {
                     type="number" 
                     id="str"
                     value={levels.strength}
-                    onChange={level => onLevelChange(parseInt(level.target.value), "strength")}></input>
+                    onChange={level => onLevelChange(parseInt(level.target.value), "strength")}
+                />
                 <Select
                     isClearable
                     className="stat-input"
@@ -223,6 +322,14 @@ function App() {
         <div className="stats">
             <div>
                 <div className="stat-left">
+                    Damage Per Second
+                </div>
+                <div className="stat-right">
+                    {parseFloat(dps.toFixed(6))}
+                </div>
+            </div>
+            <div>
+                <div className="stat-left">
                     Max hit
                 </div>
                 <div className="stat-right">
@@ -231,26 +338,42 @@ function App() {
             </div>
             <div>
                 <div className="stat-left">
-                    Spec max hit
+                    Attack Bonus
                 </div>
                 <div className="stat-right">
-                    69420
+                    {totalAttBonus}
                 </div>
             </div>
             <div>
                 <div className="stat-left">
-                    Spec accuracy
+                    Effective Attack
                 </div>
                 <div className="stat-right">
-                    420%
+                    {effectiveAtt}
                 </div>
             </div>
             <div>
                 <div className="stat-left">
-                    accuracy
+                    Max Attack Roll
                 </div>
                 <div className="stat-right">
-                    69%
+                    {maxAttRoll}
+                </div>
+            </div>
+            <div>
+                <div className="stat-left">
+                    Max Defence Roll
+                </div>
+                <div className="stat-right">
+                    {maxDefenceRoll}
+                </div>
+            </div>
+            <div>
+                <div className="stat-left">
+                    Accuracy
+                </div>
+                <div className="stat-right">
+                    {parseFloat(hitChance.toFixed(6))}
                 </div>
             </div>
             <div>
@@ -282,16 +405,9 @@ function App() {
                     Accuracy bonus
                 </div>
                 <div className="stat-right stat-bottom">
-                    6
+                    {totalAttBonus}
                 </div>
             </div>
-        </div>
-
-        <div className="monster-wrapper">
-            <select id="att-pot" className="">
-                <option value="">Monster</option>
-                <option value="">hat</option>
-            </select>
         </div>
     </div>
   );
