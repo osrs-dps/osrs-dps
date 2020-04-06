@@ -1,33 +1,29 @@
 import React, { useState } from 'react';
 import './App.css';
-import weaponSlot from './data/1h_weapon_slot.json'
-import ammoSlot from './data/ammo_blessing.json'
-import headSlot from './data/head_slot.json'
-import capeSlot from './data/cape_slot.json'
-import amuletSlot from './data/neck_slot.json'
-import chestSlot from './data/chest_slot.json'
-import legsSlot from './data/leg_slot.json'
-import shieldSlot from './data/shield_slot.json'
-import glovesSlot from './data/hand_slot.json'
-import bootsSlot from './data/boot_slot.json'
-import ringSlot from './data/ring_slot.json'
+import slotData from './slot_data';
+import _ from 'lodash';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import Select from 'react-select';
 
-const slotOptions = {
-    weapon: parseJSONSelector(weaponSlot),
-    ammo: parseJSONSelector(ammoSlot),
-    head: parseJSONSelector(headSlot),
-    cape: parseJSONSelector(capeSlot),
-    amulet: parseJSONSelector(amuletSlot),
-    chest: parseJSONSelector(chestSlot),
-    legs: parseJSONSelector(legsSlot),
-    shield: parseJSONSelector(shieldSlot),
-    gloves: parseJSONSelector(glovesSlot),
-    boots: parseJSONSelector(bootsSlot),
-    ring: parseJSONSelector(ringSlot),
-};
+const SLOT_NAMES = [
+    'weapon',
+    'ammo',
+    'head',
+    'cape',
+    'amulet',
+    'chest',
+    'legs',
+    'shield',
+    'gloves',
+    'boots',
+    'ring',
+];
+
+const slotOptions = _.reduce(SLOT_NAMES, (acc, key) => {
+    return {...acc, [key]: parseJSONSelector(slotData[key])};
+}, {});
+
 
 
 function parseJSONSelector(slot){
@@ -39,35 +35,33 @@ function parseJSONSelector(slot){
 }
 
 function App() {
-    const [equips, setEquips] = useState({
-        weapon: null,
-        ammo: null,
-        head: null,
-        cape: null,
-        amulet: null,
-        chest: null,
-        legs: null,
-        shield: null,
-        gloves: null,
-        boots: null,
-        ring: null,
-    });
+    const [equips, setEquips] = useState(_.reduce(SLOT_NAMES, (acc, key) => {
+        return {...acc, [key]: null};
+    }, {}));
 
-    const onEquipChange = (itemId, type) => {
-        setEquips({...equips, [`${type}`]: itemId});
+    const onEquipChange = (selected, type) => {
+        let item = null;
+        if(selected) {
+            item = _.find(slotData[type], {Name: selected.value});
+        }
+        setEquips({...equips, [`${type}`]: item});
     };
+
+    const totalStrBonus = _.reduce(SLOT_NAMES, (total, key) => {
+        return total + (equips[key] ? parseInt(equips[key].str) : 0);
+    }, 0);
 
   return (
     <div className="App">
         <div className="equipment-wrapper">
-            {Object.keys(slotOptions).map(type => (
+            {SLOT_NAMES.map(type => (
                 <div key={type} className="margin-tb">
                     <Select
                         isClearable
                         className="equipment-slot"
                         placeholder={`Select ${type}...`}
                         options={slotOptions[type]}
-                        value={equips[type]}
+                        value={equips[type] && {value: equips[type].Name, label: equips[type].Name}}
                         onChange={itemId => onEquipChange(itemId, type)}
                     />
                 </div>
@@ -76,11 +70,11 @@ function App() {
 
         <div className="stats-wrapper">
             <div className="margin-tb">
-                <label className="stat-label" for="rsn">RSN</label>
+                <label className="stat-label" htmlFor="rsn">RSN</label>
                 <input className="stat-input" type="text" id="rsn"></input>
             </div>
             <div className="margin-tb">
-                <label className="stat-label" for="att">Attack</label>
+                <label className="stat-label" htmlFor="att">Attack</label>
                 <input className="stat-input" type="number" id="attack"></input>
                 <select id="att-pot" className="stat-input">
                     <option value="">Potion</option>
@@ -92,7 +86,7 @@ function App() {
                 </select>
             </div>
             <div className="margin-tb">
-                <label className="stat-label" for="str">Strength</label>
+                <label className="stat-label" htmlFor="str">Strength</label>
                 <input className="stat-input" type="number" id="str"></input>
                 <select id="att-pot" className="stat-input">
                     <option value="">Potion</option>
@@ -104,7 +98,7 @@ function App() {
                 </select>
             </div>
             <div className="margin-tb">
-                <label className="stat-label" for="def">Defence</label>
+                <label className="stat-label" htmlFor="def">Defence</label>
                 <input className="stat-input" type="number" id="def"></input>
                 <select id="att-pot" className="stat-input">
                     <option value="">Potion</option>
@@ -116,7 +110,7 @@ function App() {
                 </select>
             </div>
             <div className="margin-tb">
-                <label className="stat-label" for="magic">Magic</label>
+                <label className="stat-label" htmlFor="magic">Magic</label>
                 <input className="stat-input" type="number" id="magic"></input>
                 <select id="att-pot" className="stat-input">
                     <option value="">Potion</option>
@@ -128,7 +122,7 @@ function App() {
                 </select>
             </div>
             <div className="margin-tb">
-                <label className="stat-label" for="range">Ranged</label>
+                <label className="stat-label" htmlFor="range">Ranged</label>
                 <input className="stat-input" type="number" id="range"></input>
                 <select id="att-pot" className="stat-input">
                     <option value="">Potion</option>
@@ -140,26 +134,26 @@ function App() {
                 </select>
             </div>
             <div className="margin-tb">
-                <label className="stat-label" for="hp">Hitpoints</label>
+                <label className="stat-label" htmlFor="hp">Hitpoints</label>
                 <input className="stat-input" type="number" id="hp"></input>
             </div>
             <div className="margin-tb">
-                <label className="stat-label" for="prayer">Prayer</label>
+                <label className="stat-label" htmlFor="prayer">Prayer</label>
                 <input className="stat-input" type="number" id="prayer"></input>
             </div>
         </div>
 
         <div className="checkbox-wrapper">
             <div className="">
-                <label className="checkbox-label" for="wild">Wilderness</label>
+                <label className="checkbox-label" htmlFor="wild">Wilderness</label>
                 <input className="checkbox" type="checkbox" id="wild"></input>
             </div>
             <div className="">
-                <label className="checkbox-label" for="kandarin">Kandarin</label>
+                <label className="checkbox-label" htmlFor="kandarin">Kandarin</label>
                 <input className="checkbox" type="checkbox" id="kandarin"></input>
             </div>
             <div className="">
-                <label className="checkbox-label" for="dwh">Dragon warhammer</label>
+                <label className="checkbox-label" htmlFor="dwh">Dragon warhammer</label>
                 <input className="checkbox" type="checkbox" id="dwh"></input>
             </div>
         </div>
@@ -183,7 +177,7 @@ function App() {
             </div>
             <div>
                 <div className="stat-left">
-                    Spec accuracy 
+                    Spec accuracy
                 </div>
                 <div className="stat-right">
                     420%
@@ -202,7 +196,7 @@ function App() {
                     Strength bonus
                 </div>
                 <div className="stat-right">
-                    17 million
+                    {totalStrBonus}
                 </div>
             </div>
             <div>
