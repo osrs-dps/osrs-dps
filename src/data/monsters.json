@@ -1,0 +1,12 @@
+[
+    {
+        "Name": "Abyssal Demon",
+        "magicLvl": 1,
+        "defenseLvl" : 135,
+        "stabDef" : 20,
+        "slashDef" : 20,
+        "crushDef" : 20,
+        "magicDef" : 0,
+        "rangeDef" : 20
+    }
+]
