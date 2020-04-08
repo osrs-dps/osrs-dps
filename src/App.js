@@ -175,14 +175,33 @@ function App() {
 
     const [monster, setMonster] = useState({
         Name: null,
-        magicLvl: 0,
-        defenseLvl : 0,
-        stabDef : 0,
-        slashDef : 0,
-        crushDef : 0,
-        magicDef : 0,
-        rangeDef : 0
-    })
+        Location: null,
+        expBonus: null,
+        combatLevel: 0,
+        hitpoints: 0,
+        attackLevel: 0,
+        defenceLevel: 0,
+        strengthLevel: 0,
+        magicLevel: 0,
+        rangedLevel: 0,
+        attackStyle: null,
+        attackSpeed: 0,
+        stabAttack: 0,
+        slashAttack: 0,
+        crushAttack: 0,
+        magicAttack: 0,
+        rangedAttack: 0,
+        attackBonus: 0,
+        meleeStrength: 0,
+        rangedStrengh: 0,
+        stabDef: 0,
+        slashDef: 0,
+        crushDef: 0,
+        magicDef: 0,
+        rangedDef: 0,
+        interval: null,
+        Type: null
+      })
 
     const onMonsterChange = (monsterId) => {
         let monster = null;
