@@ -1,4 +1,4 @@
-import weaponSlot from './data/1h_weapon_slot.json';
+import weaponSlot from './data/weapon_slot.json';
 import ammoSlot from './data/ammo_blessing.json';
 import headSlot from './data/head_slot.json';
 import capeSlot from './data/cape_slot.json';

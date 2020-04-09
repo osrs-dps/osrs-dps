@@ -1,0 +1,360 @@
+[
+    {
+        "optionNum" : "3",
+        "name" : "None",
+        "styles" : [
+            {
+                "style" : "Accurate",
+                "type" : "Crush"
+            },
+            {
+                "style" : "Agressive",
+                "type" : "Crush"
+            },
+            {
+                "style" : "Defensive",
+                "type" : "Crush"
+            }
+        ]
+    },
+    {
+        "optionNum" : "4",
+        "name" : "Dagger",
+        "styles" : [
+            {
+                "style" : "Accurate",
+                "type" : "Stab"
+            },
+            {
+                "style" : "Agressive",
+                "type" : "Stab"
+            },
+            {
+                "style" : "Agressive",
+                "type" : "Slash"
+            },
+            {
+                "style" : "Defensive",
+                "type" : "Stab"
+            }
+        ]
+    },
+    {
+        "optionNum" : "5",
+        "name" : "Sword",
+        "styles" : [
+            {
+                "style" : "Accurate",
+                "type" : "Stab"
+            },
+            {
+                "style" : "Agressive",
+                "type" : "Stab"
+            },
+            {
+                "style" : "Agressive",
+                "type" : "Slash"
+            },
+            {
+                "style" : "Defensive",
+                "type" : "Stab"
+            }
+        ]
+    },
+    {
+        "optionNum" : "6",
+        "name" : "longScim",
+        "styles" : [
+            {
+                "style" : "Accurate",
+                "type" : "Slash"
+            },
+            {
+                "style" : "Agressive",
+                "type" : "Slash"
+            },
+            {
+                "style" : "Controlled",
+                "type" : "Stab"
+            },
+            {
+                "style" : "Defensive",
+                "type" : "Slash"
+            }
+        ]
+    },
+    {
+        "optionNum" : "7",
+        "name" : "maceFlail",
+        "styles" : [
+            {
+                "style" : "Accurate",
+                "type" : "Crush"
+            },
+            {
+                "style" : "Agressive",
+                "type" : "Crush"
+            },
+            {
+                "style" : "Controlled",
+                "type" : "Stab"
+            },
+            {
+                "style" : "Defensive",
+                "type" : "Crush"
+            }
+        ]
+    },
+    {
+        "optionNum" : "8",
+        "name" : "Axe",
+        "styles" : [
+            {
+                "style" : "Accurate",
+                "type" : "Slash"
+            },
+            {
+                "style" : "Agressive",
+                "type" : "Slash"
+            },
+            {
+                "style" : "Agressive",
+                "type" : "Crush"
+            },
+            {
+                "style" : "Defensive",
+                "type" : "Slash"
+            }
+        ]
+    },
+    {
+        "optionNum" : "9",
+        "name" : "None",
+        "styles" : [
+            {
+                "style" : "Accurate",
+                "type" : "Crush"
+            },
+            {
+                "style" : "Agressive",
+                "type" : "Crush"
+            },
+            {
+                "style" : "Defensive",
+                "type" : "Crush"
+            }
+        ]
+    },
+    {
+        "optionNum" : "10",
+        "name" : "2h",
+        "styles" : [
+            {
+                "style" : "Accurate",
+                "type" : "Slash"
+            },
+            {
+                "style" : "Agressive",
+                "type" : "Slash"
+            },
+            {
+                "style" : "Agressive",
+                "type" : "Crush"
+            },
+            {
+                "style" : "Defensive",
+                "type" : "Slash"
+            }
+        ]
+    },
+    {
+        "optionNum" : "11",
+        "name" : "Halbard",
+        "styles" : [
+            {
+                "style" : "Agressive",
+                "type" : "Slash"
+            },
+            {
+                "style" : "Controlled",
+                "type" : "Stab"
+            },
+            {
+                "style" : "Defensive",
+                "type" : "Stab"
+            }
+        ]
+    },
+    {
+        "optionNum" : "12",
+        "name" : "Spear",
+        "styles" : [
+            {
+                "style" : "Controlled",
+                "type" : "Stab"
+            },
+            {
+                "style" : "Controlled",
+                "type" : "Slash"
+            },
+            {
+                "style" : "Controlled",
+                "type" : "Crush"
+            },
+            {
+                "style" : "Defensive",
+                "type" : "Stab"
+            }
+        ]
+    },
+    {
+        "optionNum" : "13",
+        "name" : "Whip",
+        "styles" : [
+            {
+                "style" : "Accurate",
+                "type" : "Slash"
+            },
+            {
+                "style" : "Controlled",
+                "type" : "Slash"
+            },
+            {
+                "style" : "Defensive",
+                "type" : "Slash"
+            }
+        ]
+    },
+    {
+        "optionNum" : "14",
+        "name" : "Bludgeon",
+        "styles" : [
+            {
+                "style" : "Agressive",
+                "type" : "Crush"
+            }
+        ]
+    },
+    {
+        "optionNum" : "15",
+        "name" : "Staff",
+        "styles" : [
+            {
+                "style" : "Accurate",
+                "type" : "Crush"
+            },
+            {
+                "style" : "Agressive",
+                "type" : "Crush"
+            },
+            {
+                "style" : "Defensive",
+                "type" : "Crush"
+            }
+        ]
+    },
+    {
+        "optionNum" : "16",
+        "name" : "Pickaxe",
+        "styles" : [
+            {
+                "style" : "Accurate",
+                "type" : "Stab"
+            },
+            {
+                "style" : "Agressive",
+                "type" : "Stab"
+            },
+            {
+                "style" : "Agressive",
+                "type" : "Crush"
+            },
+            {
+                "style" : "Defensive",
+                "type" : "Stab"
+            }
+        ]
+    },
+    {
+        "optionNum" : "17",
+        "name" : "Ranged",
+        "styles" : [
+            {
+                "style" : "Accurate",
+                "type" : "Ranged"
+            },
+            {
+                "style" : "Rapid",
+                "type" : "ranged"
+            },
+            {
+                "style" : "Longrange",
+                "type" : "Ranged"
+            }
+        ]
+    },
+    {
+        "optionNum" : "18",
+        "name" : "Salamander",
+        "styles" : [
+            {
+                "style" : "Agressive",
+                "type" : "Slash"
+            },
+            {
+                "style" : "rapid",
+                "type" : "Ranged"
+            },
+            {
+                "style" : "Blaze",
+                "type" : "Magic"
+            }
+        ]
+    },
+    {
+        "optionNum" : "19",
+        "name" : "SotD",
+        "styles" : [
+            {
+                "style" : "Accurate",
+                "type" : "Stab"
+            },
+            {
+                "style" : "Agressive",
+                "type" : "Slash"
+            },
+            {
+                "style" : "Defensive",
+                "type" : "Crush"
+            }
+        ]
+    },
+    {
+        "optionNum" : "20",
+        "name" : "Trident",
+        "styles" : [
+            {
+                "style" : "Accurate",
+                "type" : "Magic"
+            },
+            {
+                "style" : "Longrange",
+                "type" : "Magic"
+            }
+        ]
+    },
+    {
+        "optionNum" : "21",
+        "name" : "2H Shield",
+        "styles" : [
+            {
+                "style" : "Agressive",
+                "type" : "Crush"
+            },
+            {
+                "style" : "Defensive",
+                "type" : "Crush"
+            }
+        ]
+    }  
+]

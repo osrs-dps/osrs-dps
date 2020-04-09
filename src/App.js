@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import './App.css';
 import slotData from './slot_data';
 import monsterData from './data/monsters.json';
+import attackStyles from "./data/attack_styles.json";
 import _ from 'lodash';
-
 import 'bootstrap/dist/css/bootstrap.css';
 import Select from 'react-select';
 
