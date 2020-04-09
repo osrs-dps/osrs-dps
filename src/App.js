@@ -23,6 +23,22 @@ const SLOT_NAMES = [
     'ring',
 ];
 
+const DEFENCE_STYLE_MAP = {
+    Stab: "stabDef",
+    Slash: "slashDef",
+    Crush: "crushDef",
+    Magic: "magicDef",
+    Ranged: "rangeDef"
+};
+
+const ATTACK_STYLE_MAP = {
+    Stab: "stabatt",
+    Slash: "slashatt",
+    Crush: "crushatt",
+    Magic: "magicatt",
+    Ranged: "rangeatt"
+};
+
 const STR_PRAYERS = [
     {value: 1.23, label: "Piety"},
     {value: 1.18, label: "Chivalry"},
@@ -88,6 +104,38 @@ function App() {
         hitpoints: 10,
         prayer: 1
     });
+
+    const onAttStyleChange = (styleObj) => {
+        let attBonus = 0;
+        let strBonus = 0;
+        console.log(styleObj);
+        if(styleObj){
+            if(styleObj.value.style === "Agressive"){
+                strBonus = 3;
+            }
+            else if(styleObj.value.style === "Accurate"){
+                attBonus = 3;
+            }
+            else if(styleObj.value.style === "Controlled"){
+                attBonus = 1;
+                strBonus = 1;
+            }
+            setAttStyle({
+                style: styleObj.value.type,
+                attAccStyle: ATTACK_STYLE_MAP[styleObj.value.type],
+                attDefStyle: DEFENCE_STYLE_MAP[styleObj.value.type]
+            });
+        }
+        setAttBonuses({...attBonuses, [`style`]: attBonus});
+        setStrBonuses({...strBonuses, [`style`]: strBonus});
+    };
+
+    const [attStyle, setAttStyle] = useState({
+        style: null,
+        attAccStyle: null,
+        attDefStyle: null
+    });
+
     //########## Strength Calcs ##########
     const totalStrBonus = _.reduce(SLOT_NAMES, (total, key) => {
         return total + (equips[key] ? parseInt(equips[key].str) : 0);
@@ -122,7 +170,7 @@ function App() {
     //https://oldschool.runescape.wiki/w/Maximum_melee_hit
     const strPotionBonus = strBonuses.potionBase + Math.floor(levels.strength*strBonuses.potionMultiplier);
 
-    const effectiveStr = Math.floor(((levels.strength + strPotionBonus) * strBonuses.prayer * 1) + 0);
+    const effectiveStr = Math.floor(((levels.strength + strPotionBonus) * strBonuses.prayer * 1) + strBonuses.style);
     //Effective Strength = ((Strength Level + Potion Bonus) * Prayer Bonus * Other Bonus) + Style Bonus
     //todo: attack style, void, slayer helm, void
 
@@ -133,7 +181,7 @@ function App() {
 
     //########## Attack Calcs ##########
     const totalAttBonus = _.reduce(SLOT_NAMES, (total, key) => {
-        return total + (equips[key] ? parseInt(equips[key].slashatt) : 0);
+        return total + ((equips[key] && attStyle.attAccStyle)? parseInt(equips[key][attStyle.attAccStyle]) : 0);
     }, 0);
     //change slashatt for other styles
 
@@ -161,11 +209,11 @@ function App() {
         prayer: 1,
         other: 1,
         style: 0
-    })
-    
+    });
+
     const attPotionBonus = attBonuses.potionBase + Math.floor(levels.attack*attBonuses.potionMultiplier);
 
-    const effectiveAtt = Math.floor(((levels.attack + attPotionBonus) * attBonuses.prayer * 1) + 3 + 8);
+    const effectiveAtt = Math.floor(((levels.attack + attPotionBonus) * attBonuses.prayer * 1) + attBonuses.style + 8);
     //todo: attack style, void, slayer helm, void
 
     const maxAttRoll = effectiveAtt * (totalAttBonus + 64) * 1;
@@ -213,7 +261,10 @@ function App() {
     };
 
     const effectiveDefence = monster.defenceLevel + 9;
-    const maxDefenceRoll = effectiveDefence * (monster.slashDef + 64);
+
+    const monsterDefStyle = attStyle.style ? monster[attStyle.attDefStyle] : 0;
+
+    const maxDefenceRoll = effectiveDefence * (monsterDefStyle + 64);
 
     const hitChance = maxAttRoll > maxDefenceRoll ? 1 - (maxDefenceRoll + 2) / (2 * (maxAttRoll + 1)):
                                                     maxAttRoll / (2 * (maxDefenceRoll + 1));
@@ -237,8 +288,20 @@ function App() {
 
             <Select
                 isClearable
-                className="equipment-slot"
-                placeholder={`Select Enemy`}
+                className="equipment-slot margin-tb"
+                placeholder={`Select Attack Style...`}
+                options={_.find(attackStyles, function(o){
+                    return equips.weapon ? o.optionNum === equips.weapon.attackStyles:null;
+                }) ? _.find(attackStyles, function(o){
+                    return equips.weapon ? o.optionNum === equips.weapon.attackStyles:null;
+                }).styles : []}
+                onChange={style => onAttStyleChange(style)}
+            />
+
+            <Select
+                isClearable
+                className="equipment-slot margin-tb"
+                placeholder={`Select Enemy...`}
                 options={monsterOptions}
                 value={monsterOptions && monsterOptions.Name}
                 onChange={monsterId => onMonsterChange(monsterId)}

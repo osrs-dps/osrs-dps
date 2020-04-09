@@ -1,360 +1,543 @@
 [
     {
-        "optionNum" : "3",
-        "name" : "None",
-        "styles" : [
+        "optionNum": 3,
+        "name": "None",
+        "styles": [
             {
-                "style" : "Accurate",
-                "type" : "Crush"
+                "value": {
+                    "style": "Accurate",
+                    "type": "Crush"
+                },
+                "label": "Accurate Crush"
             },
             {
-                "style" : "Agressive",
-                "type" : "Crush"
+                "value": {
+                    "style": "Agressive",
+                    "type": "Crush"
+                },
+                "label": "Agressive Crush"
             },
             {
-                "style" : "Defensive",
-                "type" : "Crush"
+                "value": {
+                    "style": "Defensive",
+                    "type": "Crush"
+                },
+                "label": "Defensive Crush"
             }
         ]
     },
     {
-        "optionNum" : "4",
-        "name" : "Dagger",
-        "styles" : [
+        "optionNum": 4,
+        "name": "Dagger",
+        "styles": [
             {
-                "style" : "Accurate",
-                "type" : "Stab"
+                "value": {
+                    "style": "Accurate",
+                    "type": "Stab"
+                },
+                "label": "Accurate Stab"
             },
             {
-                "style" : "Agressive",
-                "type" : "Stab"
+                "value": {
+                    "style": "Agressive",
+                    "type": "Stab"
+                },
+                "label": "Agressive Stab"
             },
             {
-                "style" : "Agressive",
-                "type" : "Slash"
+                "value": {
+                    "style": "Agressive",
+                    "type": "Slash"
+                },
+                "label": "Agressive Slash"
             },
             {
-                "style" : "Defensive",
-                "type" : "Stab"
+                "value": {
+                    "style": "Defensive",
+                    "type": "Stab"
+                },
+                "label": "Defensive Stab"
             }
         ]
     },
     {
-        "optionNum" : "5",
-        "name" : "Sword",
-        "styles" : [
+        "optionNum": 5,
+        "name": "Sword",
+        "styles": [
             {
-                "style" : "Accurate",
-                "type" : "Stab"
+                "value": {
+                    "style": "Accurate",
+                    "type": "Stab"
+                },
+                "label": "Accurate Stab"
             },
             {
-                "style" : "Agressive",
-                "type" : "Stab"
+                "value": {
+                    "style": "Agressive",
+                    "type": "Stab"
+                },
+                "label": "Agressive Stab"
             },
             {
-                "style" : "Agressive",
-                "type" : "Slash"
+                "value": {
+                    "style": "Agressive",
+                    "type": "Slash"
+                },
+                "label": "Agressive Slash"
             },
             {
-                "style" : "Defensive",
-                "type" : "Stab"
+                "value": {
+                    "style": "Defensive",
+                    "type": "Stab"
+                },
+                "label": "Defensive Stab"
             }
         ]
     },
     {
-        "optionNum" : "6",
-        "name" : "longScim",
-        "styles" : [
+        "optionNum": 6,
+        "name": "longScim",
+        "styles": [
             {
-                "style" : "Accurate",
-                "type" : "Slash"
+                "value": {
+                    "style": "Accurate",
+                    "type": "Slash"
+                },
+                "label": "Accurate Slash"
             },
             {
-                "style" : "Agressive",
-                "type" : "Slash"
+                "value": {
+                    "style": "Agressive",
+                    "type": "Slash"
+                },
+                "label": "Agressive Slash"
             },
             {
-                "style" : "Controlled",
-                "type" : "Stab"
+                "value": {
+                    "style": "Controlled",
+                    "type": "Stab"
+                },
+                "label": "Controlled Stab"
             },
             {
-                "style" : "Defensive",
-                "type" : "Slash"
+                "value": {
+                    "style": "Defensive",
+                    "type": "Slash"
+                },
+                "label": "Defensive Slash"
             }
         ]
     },
     {
-        "optionNum" : "7",
-        "name" : "maceFlail",
-        "styles" : [
+        "optionNum": 7,
+        "name": "maceFlail",
+        "styles": [
             {
-                "style" : "Accurate",
-                "type" : "Crush"
+                "value": {
+                    "style": "Accurate",
+                    "type": "Crush"
+                },
+                "label": "Accurate Crush"
             },
             {
-                "style" : "Agressive",
-                "type" : "Crush"
+                "value": {
+                    "style": "Agressive",
+                    "type": "Crush"
+                },
+                "label": "Agressive Crush"
             },
             {
-                "style" : "Controlled",
-                "type" : "Stab"
+                "value": {
+                    "style": "Controlled",
+                    "type": "Stab"
+                },
+                "label": "Controlled Stab"
             },
             {
-                "style" : "Defensive",
-                "type" : "Crush"
+                "value": {
+                    "style": "Defensive",
+                    "type": "Crush"
+                },
+                "label": "Defensive Crush"
             }
         ]
     },
     {
-        "optionNum" : "8",
-        "name" : "Axe",
-        "styles" : [
+        "optionNum": 8,
+        "name": "Axe",
+        "styles": [
             {
-                "style" : "Accurate",
-                "type" : "Slash"
+                "value": {
+                    "style": "Accurate",
+                    "type": "Slash"
+                },
+                "label": "Accurate Slash"
             },
             {
-                "style" : "Agressive",
-                "type" : "Slash"
+                "value": {
+                    "style": "Agressive",
+                    "type": "Slash"
+                },
+                "label": "Agressive Slash"
             },
             {
-                "style" : "Agressive",
-                "type" : "Crush"
+                "value": {
+                    "style": "Agressive",
+                    "type": "Crush"
+                },
+                "label": "Agressive Crush"
             },
             {
-                "style" : "Defensive",
-                "type" : "Slash"
+                "value": {
+                    "style": "Defensive",
+                    "type": "Slash"
+                },
+                "label": "Defensive Slash"
             }
         ]
     },
     {
-        "optionNum" : "9",
-        "name" : "None",
-        "styles" : [
+        "optionNum": 9,
+        "name": "None",
+        "styles": [
             {
-                "style" : "Accurate",
-                "type" : "Crush"
+                "value": {
+                    "style": "Accurate",
+                    "type": "Crush"
+                },
+                "label": "Accurate Crush"
             },
             {
-                "style" : "Agressive",
-                "type" : "Crush"
+                "value": {
+                    "style": "Agressive",
+                    "type": "Crush"
+                },
+                "label": "Agressive Crush"
             },
             {
-                "style" : "Defensive",
-                "type" : "Crush"
+                "value": {
+                    "style": "Defensive",
+                    "type": "Crush"
+                },
+                "label": "Defensive Crush"
             }
         ]
     },
     {
-        "optionNum" : "10",
-        "name" : "2h",
-        "styles" : [
+        "optionNum": 10,
+        "name": "2h",
+        "styles": [
             {
-                "style" : "Accurate",
-                "type" : "Slash"
+                "value": {
+                    "style": "Accurate",
+                    "type": "Slash"
+                },
+                "label": "Accurate Slash"
             },
             {
-                "style" : "Agressive",
-                "type" : "Slash"
+                "value": {
+                    "style": "Agressive",
+                    "type": "Slash"
+                },
+                "label": "Agressive Slash"
             },
             {
-                "style" : "Agressive",
-                "type" : "Crush"
+                "value": {
+                    "style": "Agressive",
+                    "type": "Crush"
+                },
+                "label": "Agressive Crush"
             },
             {
-                "style" : "Defensive",
-                "type" : "Slash"
+                "value": {
+                    "style": "Defensive",
+                    "type": "Slash"
+                },
+                "label": "Defensive Slash"
             }
         ]
     },
     {
-        "optionNum" : "11",
-        "name" : "Halbard",
-        "styles" : [
+        "optionNum": 11,
+        "name": "Halbard",
+        "styles": [
             {
-                "style" : "Agressive",
-                "type" : "Slash"
+                "value": {
+                    "style": "Agressive",
+                    "type": "Slash"
+                },
+                "label": "Agressive Slash"
             },
             {
-                "style" : "Controlled",
-                "type" : "Stab"
+                "value": {
+                    "style": "Controlled",
+                    "type": "Stab"
+                },
+                "label": "Controlled Stab"
             },
             {
-                "style" : "Defensive",
-                "type" : "Stab"
+                "value": {
+                    "style": "Defensive",
+                    "type": "Stab"
+                },
+                "label": "Defensive Stab"
             }
         ]
     },
     {
-        "optionNum" : "12",
-        "name" : "Spear",
-        "styles" : [
+        "optionNum": 12,
+        "name": "Spear",
+        "styles": [
             {
-                "style" : "Controlled",
-                "type" : "Stab"
+                "value": {
+                    "style": "Controlled",
+                    "type": "Stab"
+                },
+                "label": "Controlled Stab"
             },
             {
-                "style" : "Controlled",
-                "type" : "Slash"
+                "value": {
+                    "style": "Controlled",
+                    "type": "Slash"
+                },
+                "label": "Controlled Slash"
             },
             {
-                "style" : "Controlled",
-                "type" : "Crush"
+                "value": {
+                    "style": "Controlled",
+                    "type": "Crush"
+                },
+                "label": "Controlled Crush"
             },
             {
-                "style" : "Defensive",
-                "type" : "Stab"
+                "value": {
+                    "style": "Defensive",
+                    "type": "Stab"
+                },
+                "label": "Defensive Stab"
             }
         ]
     },
     {
-        "optionNum" : "13",
-        "name" : "Whip",
-        "styles" : [
+        "optionNum": 13,
+        "name": "Whip",
+        "styles": [
             {
-                "style" : "Accurate",
-                "type" : "Slash"
+                "value": {
+                    "style": "Accurate",
+                    "type": "Slash"
+                },
+                "label": "Accurate Slash"
             },
             {
-                "style" : "Controlled",
-                "type" : "Slash"
+                "value": {
+                    "style": "Controlled",
+                    "type": "Slash"
+                },
+                "label": "Controlled Slash"
             },
             {
-                "style" : "Defensive",
-                "type" : "Slash"
+                "value": {
+                    "style": "Defensive",
+                    "type": "Slash"
+                },
+                "label": "Defensive Slash"
             }
         ]
     },
     {
-        "optionNum" : "14",
-        "name" : "Bludgeon",
-        "styles" : [
+        "optionNum": 14,
+        "name": "Bludgeon",
+        "styles": [
             {
-                "style" : "Agressive",
-                "type" : "Crush"
+                "value": {
+                    "style": "Agressive",
+                    "type": "Crush"
+                },
+                "label": "Agressive Crush"
             }
         ]
     },
     {
-        "optionNum" : "15",
-        "name" : "Staff",
-        "styles" : [
+        "optionNum": 15,
+        "name": "Staff",
+        "styles": [
             {
-                "style" : "Accurate",
-                "type" : "Crush"
+                "value": {
+                    "style": "Accurate",
+                    "type": "Crush"
+                },
+                "label": "Accurate Crush"
             },
             {
-                "style" : "Agressive",
-                "type" : "Crush"
+                "value": {
+                    "style": "Agressive",
+                    "type": "Crush"
+                },
+                "label": "Agressive Crush"
             },
             {
-                "style" : "Defensive",
-                "type" : "Crush"
+                "value": {
+                    "style": "Defensive",
+                    "type": "Crush"
+                },
+                "label": "Defensive Crush"
             }
         ]
     },
     {
-        "optionNum" : "16",
-        "name" : "Pickaxe",
-        "styles" : [
+        "optionNum": 16,
+        "name": "Pickaxe",
+        "styles": [
             {
-                "style" : "Accurate",
-                "type" : "Stab"
+                "value": {
+                    "style": "Accurate",
+                    "type": "Stab"
+                },
+                "label": "Accurate Stab"
             },
             {
-                "style" : "Agressive",
-                "type" : "Stab"
+                "value": {
+                    "style": "Agressive",
+                    "type": "Stab"
+                },
+                "label": "Agressive Stab"
             },
             {
-                "style" : "Agressive",
-                "type" : "Crush"
+                "value": {
+                    "style": "Agressive",
+                    "type": "Crush"
+                },
+                "label": "Agressive Crush"
             },
             {
-                "style" : "Defensive",
-                "type" : "Stab"
+                "value": {
+                    "style": "Defensive",
+                    "type": "Stab"
+                },
+                "label": "Defensive Stab"
             }
         ]
     },
     {
-        "optionNum" : "17",
-        "name" : "Ranged",
-        "styles" : [
+        "optionNum": 17,
+        "name": "Ranged",
+        "styles": [
             {
-                "style" : "Accurate",
-                "type" : "Ranged"
+                "value": {
+                    "style": "Accurate",
+                    "type": "Ranged"
+                },
+                "label": "Accurate Ranged"
             },
             {
-                "style" : "Rapid",
-                "type" : "ranged"
+                "value": {
+                    "style": "Rapid",
+                    "type": "ranged"
+                },
+                "label": "Rapid ranged"
             },
             {
-                "style" : "Longrange",
-                "type" : "Ranged"
+                "value": {
+                    "style": "Longrange",
+                    "type": "Ranged"
+                },
+                "label": "Longrange Ranged"
             }
         ]
     },
     {
-        "optionNum" : "18",
-        "name" : "Salamander",
-        "styles" : [
+        "optionNum": 18,
+        "name": "Salamander",
+        "styles": [
             {
-                "style" : "Agressive",
-                "type" : "Slash"
+                "value": {
+                    "style": "Agressive",
+                    "type": "Slash"
+                },
+                "label": "Agressive Slash"
             },
             {
-                "style" : "rapid",
-                "type" : "Ranged"
+                "value": {
+                    "style": "rapid",
+                    "type": "Ranged"
+                },
+                "label": "rapid Ranged"
             },
             {
-                "style" : "Blaze",
-                "type" : "Magic"
+                "value": {
+                    "style": "Blaze",
+                    "type": "Magic"
+                },
+                "label": "Blaze Magic"
             }
         ]
     },
     {
-        "optionNum" : "19",
-        "name" : "SotD",
-        "styles" : [
+        "optionNum": 19,
+        "name": "SotD",
+        "styles": [
             {
-                "style" : "Accurate",
-                "type" : "Stab"
+                "value": {
+                    "style": "Accurate",
+                    "type": "Stab"
+                },
+                "label": "Accurate Stab"
             },
             {
-                "style" : "Agressive",
-                "type" : "Slash"
+                "value": {
+                    "style": "Agressive",
+                    "type": "Slash"
+                },
+                "label": "Agressive Slash"
             },
             {
-                "style" : "Defensive",
-                "type" : "Crush"
+                "value": {
+                    "style": "Defensive",
+                    "type": "Crush"
+                },
+                "label": "Defensive Crush"
             }
         ]
     },
     {
-        "optionNum" : "20",
-        "name" : "Trident",
-        "styles" : [
+        "optionNum": 20,
+        "name": "Trident",
+        "styles": [
             {
-                "style" : "Accurate",
-                "type" : "Magic"
+                "value": {
+                    "style": "Accurate",
+                    "type": "Magic"
+                },
+                "label": "Accurate Magic"
             },
             {
-                "style" : "Longrange",
-                "type" : "Magic"
+                "value": {
+                    "style": "Longrange",
+                    "type": "Magic"
+                },
+                "label": "Longrange Magic"
             }
         ]
     },
     {
-        "optionNum" : "21",
-        "name" : "2H Shield",
-        "styles" : [
+        "optionNum": 21,
+        "name": "2H Shield",
+        "styles": [
             {
-                "style" : "Agressive",
-                "type" : "Crush"
+                "value": {
+                    "style": "Agressive",
+                    "type": "Crush"
+                },
+                "label": "Agressive Crush"
             },
             {
-                "style" : "Defensive",
-                "type" : "Crush"
+                "value": {
+                    "style": "Defensive",
+                    "type": "Crush"
+                },
+                "label": "Defensive Crush"
             }
         ]
-    }  
+    }
 ]
