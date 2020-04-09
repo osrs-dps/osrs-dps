@@ -10,14 +10,14 @@ import Select from 'react-select';
 const weaponTicks = 4; //Placeholder until weapon tickrate is added to data
 
 const SLOT_NAMES = [
-    'weapon',
+    'weapon',    
+    'shield',
     'ammo',
     'head',
     'cape',
     'amulet',
     'chest',
     'legs',
-    'shield',
     'gloves',
     'boots',
     'ring',
@@ -86,10 +86,20 @@ function App() {
 
     const onEquipChange = (selected, type) => {
         let item = null;
+        let clearShield = false;
         if(selected) {
             item = _.find(slotData[type], {Name: selected.value});
+            if(type === "weapon" && item.twoHand){
+                clearShield = true;
+            }
         }
-        setEquips({...equips, [`${type}`]: item});
+        if(clearShield){
+            setEquips({...equips, [`shield`]: null, [`${type}`]: item});
+        }
+        else{
+            setEquips({...equips, [`${type}`]: item});
+        }
+        console.log(equips);
     };
 
     const onLevelChange = (level, type) => {
@@ -277,6 +287,7 @@ function App() {
                 <div key={type} className="margin-tb">
                     <Select
                         isClearable
+                        isDisabled={type==="shield" && equips.weapon && equips.weapon.twoHand}
                         className="equipment-slot"
                         placeholder={`Select ${type}...`}
                         options={slotOptions[type]}
