@@ -7,8 +7,6 @@ import _ from 'lodash';
 import 'bootstrap/dist/css/bootstrap.css';
 import Select from 'react-select';
 
-const weaponTicks = 4; //Placeholder until weapon tickrate is added to data
-
 const SLOT_NAMES = [
     'weapon',    
     'shield',
@@ -99,7 +97,6 @@ function App() {
         else{
             setEquips({...equips, [`${type}`]: item});
         }
-        console.log(equips);
     };
 
     const onLevelChange = (level, type) => {
@@ -279,7 +276,7 @@ function App() {
     const hitChance = maxAttRoll > maxDefenceRoll ? 1 - (maxDefenceRoll + 2) / (2 * (maxAttRoll + 1)):
                                                     maxAttRoll / (2 * (maxDefenceRoll + 1));
     
-    const dps = hitChance * (maxHit / 2) / (weaponTicks * 0.6);
+    const dps = hitChance * (maxHit / 2) / (6 - (equips.weapon?equips.weapon.attackSpeed:5) * 0.6);
   return (
     <div className="App">
         <div className="equipment-wrapper">
