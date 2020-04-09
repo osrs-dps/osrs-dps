@@ -1,3 +1,5 @@
+
+
 .equipment-slot {
   padding-top: 3px;
   padding-bottom: 3px;
@@ -25,7 +27,7 @@
 }
 
 .stat-input {
-  width: 250px;
+  width: 50px;
   padding: 1px;
 }
 
@@ -68,4 +70,24 @@
 }
 .stat-bottom{
   border-bottom: solid black 1px;
+}
+
+div.noPadding {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+div.noMargin {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.input-group-text{
+  width: 87px;
 }

@@ -5,6 +5,7 @@ import monsterData from './data/monsters.json';
 import attackStyles from "./data/attack_styles.json";
 import _ from 'lodash';
 import 'bootstrap/dist/css/bootstrap.css';
+import {Container, Row, Col, Form, InputGroup, Button} from 'react-bootstrap';
 import Select from 'react-select';
 
 const SLOT_NAMES = [
@@ -103,13 +104,13 @@ function App() {
         setLevels({...levels, [`${type}`]: level})
     };
     const [levels, setLevels] = useState({
-        attack: 1,
-        strength: 1,
-        defence: 1,
-        magic: 1,
-        ranged: 1,
-        hitpoints: 10,
-        prayer: 1
+        attack: 99,
+        strength: 99,
+        defence: 99,
+        magic: 99,
+        ranged: 99,
+        hitpoints: 99,
+        prayer: 99
     });
 
     const onAttStyleChange = (styleObj) => {
@@ -277,8 +278,16 @@ function App() {
                                                     maxAttRoll / (2 * (maxDefenceRoll + 1));
     
     const dps = hitChance * (maxHit / 2) / (6 - (equips.weapon?equips.weapon.attackSpeed:5) * 0.6);
+
   return (
+      
     <div className="App">
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+        />
         <div className="equipment-wrapper">
             {SLOT_NAMES.map(type => (
                 <div key={type} className="margin-tb">
@@ -320,78 +329,127 @@ function App() {
 
         <div className="stats-wrapper">
             <div className="margin-tb">
-                <label className="stat-label" htmlFor="rsn">RSN</label>
-                <input className="stat-input" type="text" id="rsn"></input>
+                <Container>
+                <Row>
+                    <Col className="noPadding" lg="3"><Form.Control placeholder="Enter RSN..."/></Col>
+                    <Col><Button variant="primary">Search</Button>{' '}</Col>
+                </Row>
+                </Container>
             </div>
             <div className="margin-tb">
-                <label className="stat-label" htmlFor="att">Attack</label>
-                <input className="stat-input" 
-                    type="number" 
-                    id="sttack"
-                    value={levels.attack}
-                    onChange={level => onLevelChange(parseInt(level.target.value), "attack")}
-                />
-                <Select
-                    isClearable
-                    className="stat-input"
-                    placeholder={`Potion`}
-                    options={ATT_POTIONS}
-                    onChange={potion => onAttPotionChange(potion && potion.value)}
-                    />
-                <Select
-                    isClearable
-                    className="stat-input"
-                    placeholder={`Prayer`}
-                    options={ATT_PRAYERS}
-                    onChange={prayer => setAttBonuses({...attBonuses, [`prayer`]:prayer ? prayer.value : 1})}
-                />
+                <Container>
+                    <Row>
+                        <Col className="noPadding" lg="2">
+                            <InputGroup>
+                                <InputGroup.Prepend>
+                                    <InputGroup.Text id="basic-addon3">
+                                        Attack
+                                    </InputGroup.Text>
+                                </InputGroup.Prepend>
+                                <Form.Control
+                                    type="number" 
+                                    class="stat-input"
+                                    id="attack"
+                                    value={levels.attack}
+                                    onChange={level => onLevelChange(parseInt(level.target.value), "attack")}
+                                />
+                            </InputGroup>
+                        </Col>
+                        <Col lg="3"><Select
+                            isClearable
+                            placeholder={`Potion`}
+                            options={ATT_POTIONS}
+                            onChange={potion => onAttPotionChange(potion && potion.value)}
+                        /></Col>
+                        <Col lg="3"><Select
+                            isClearable
+                            placeholder={`Prayer`}
+                            options={ATT_PRAYERS}
+                            onChange={prayer => setAttBonuses({...attBonuses, [`prayer`]:prayer ? prayer.value : 1})}
+                        /></Col>
+                    </Row>
+                </Container>
             </div>
             <div className="margin-tb">
-                <label className="stat-label" htmlFor="str">Strength</label>
-                <input className="stat-input" 
-                    type="number" 
-                    id="str"
-                    value={levels.strength}
-                    onChange={level => onLevelChange(parseInt(level.target.value), "strength")}
-                />
-                <Select
-                    isClearable
-                    className="stat-input"
-                    placeholder={`Potion`}
-                    options={STR_POTIONS}
-                    onChange={potion => onStrPotionChange(potion && potion.value)}
-                />
-                <Select
-                    isClearable
-                    className="stat-input"
-                    placeholder={`Prayer`}
-                    options={STR_PRAYERS}
-                    onChange={prayer => setStrBonuses({...strBonuses, [`prayer`]:prayer ? prayer.value : 1})}
-                />
+                <Container>
+                    <Row>
+                    <Col className="noPadding" lg="2">
+                        <InputGroup>
+                            <InputGroup.Prepend>
+                                <InputGroup.Text id="basic-addon3">
+                                    Strength
+                                </InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <Form.Control className="stat-input" 
+                                type="number" 
+                                id="str"
+                                value={levels.strength}
+                                onChange={level => onLevelChange(parseInt(level.target.value), "strength")}
+                            />
+                        </InputGroup>
+                    </Col>
+                    <Col lg="3"><Select
+                        isClearable
+                        placeholder={`Potion`}
+                        options={STR_POTIONS}
+                        onChange={potion => onStrPotionChange(potion && potion.value)}
+                    /></Col>
+                    <Col lg="3"><Select
+                        isClearable
+                        placeholder={`Prayer`}
+                        options={STR_PRAYERS}
+                        onChange={prayer => setStrBonuses({...strBonuses, [`prayer`]:prayer ? prayer.value : 1})}
+                    /></Col>
+                    </Row>
+                </Container>
             </div>
             <div className="margin-tb">
-                <label className="stat-label" htmlFor="magic">Magic</label>
-                <input className="stat-input" type="number" id="magic"></input>
-                <select id="att-pot" className="stat-input">
-                    <option value="">Potion</option>
-                    <option value="">hat</option>
-                </select>
-                <select id="att-pot" className="stat-input">
-                    <option value="">Prayer</option>
-                    <option value="">hat</option>
-                </select>
+                <Container>
+                    <Row>
+                    <Col className="noPadding" lg="2">
+                        <InputGroup>
+                            <InputGroup.Prepend>
+                                <InputGroup.Text id="basic-addon3">
+                                    Magic
+                                </InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <Form.Control className="stat-input" type="number" id="magic"/>
+                        </InputGroup>
+                    </Col>
+                    <Col lg="3"><Select
+                        isClearable
+                        placeholder={`Potion`}
+                    /></Col>
+                    <Col lg="3"><Select
+                        isClearable
+                        placeholder={`Prayer`}
+                    /></Col>
+                    </Row>
+                </Container>
             </div>
             <div className="margin-tb">
-                <label className="stat-label" htmlFor="range">Ranged</label>
-                <input className="stat-input" type="number" id="range"></input>
-                <select id="att-pot" className="stat-input">
-                    <option value="">Potion</option>
-                    <option value="">hat</option>
-                </select>
-                <select id="att-pot" className="stat-input">
-                    <option value="">Prayer</option>
-                    <option value="">hat</option>
-                </select>
+                <Container>
+                    <Row>
+                    <Col className="noPadding" lg="2">
+                        <InputGroup>
+                            <InputGroup.Prepend>
+                                <InputGroup.Text id="basic-addon3">
+                                    Ranged
+                                </InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <Form.Control className="stat-input" type="number" id="ranged"/>
+                        </InputGroup>
+                    </Col>
+                    <Col lg="3"><Select
+                        isClearable
+                        placeholder={`Potion`}
+                    /></Col>
+                    <Col lg="3"><Select
+                        isClearable
+                        placeholder={`Prayer`}
+                    /></Col>
+                    </Row>
+                </Container>
             </div>
         </div>
 
