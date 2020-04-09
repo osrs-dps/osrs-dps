@@ -172,8 +172,7 @@ function App() {
     //salve, slayer, arclight, dchb, dhl, wildy weapons, tbow
 
     //########## Enemy Defence Calcs ##########
-
-    const [monster, setMonster] = useState({
+    const initialState = {
         Name: null,
         Location: null,
         expBonus: null,
@@ -201,17 +200,19 @@ function App() {
         rangedDef: 0,
         interval: null,
         Type: null
-      })
+    };
+    const [monster, setMonster] = useState(initialState)
 
     const onMonsterChange = (monsterId) => {
-        let monster = null;
+        let monster = initialState;
         if(monsterId) {
             monster = _.find(monsterData, {Name: monsterId.value});
         }
+        console.log(JSON.stringify(monster));
         setMonster(monster);
     };
 
-    const effectiveDefence = monster.defenseLvl + 9;
+    const effectiveDefence = monster.defenceLevel + 9;
     const maxDefenceRoll = effectiveDefence * (monster.slashDef + 64);
 
     const hitChance = maxAttRoll > maxDefenceRoll ? 1 - (maxDefenceRoll + 2) / (2 * (maxAttRoll + 1)):
