@@ -5,7 +5,7 @@ import monsterData from './data/monsters.json';
 import attackStyles from "./data/attack_styles.json";
 import _ from 'lodash';
 import 'bootstrap/dist/css/bootstrap.css';
-import {Container, Row, Col, Form, InputGroup, Button} from 'react-bootstrap';
+import {Container, Row, Col, Form, InputGroup, Button, Table} from 'react-bootstrap';
 import Select from 'react-select';
 
 const SLOT_NAMES = [
@@ -63,6 +63,28 @@ const ATT_POTIONS = [
     {value: "overload(+)", label: "Overload (+)"}
 ];
 
+const RANGED_PRAYERS = [
+    {     
+        label: "Rigour",
+        value: {
+            rangedStr: 1.23,
+            rangedAcc: 1.20
+        }
+    },
+    {
+        label: "Eagle Eye",
+        value: {
+            rangedStr: 1.15,
+            rangedAcc: 1.15
+        }
+    }
+];
+
+const RANGED_POTIONS = [
+    {value: "rangingPotion", label: "Ranging Potion"},
+    {value: "overload(+)", label: "Overload (+)"}
+];
+
 const slotOptions = _.reduce(SLOT_NAMES, (acc, key) => {
     return {...acc, [key]: parseJSONSelector(slotData[key])};
 }, {});
@@ -98,6 +120,11 @@ function App() {
         else{
             setEquips({...equips, [`${type}`]: item});
         }
+    };
+
+    const [rsn, setRsn] = useState(null);
+    const submitRsn = () => {
+        console.log("get rsn here");
     };
 
     const onLevelChange = (level, type) => {
@@ -326,13 +353,24 @@ function App() {
         </div>
 
 
-
         <div className="stats-wrapper">
             <div className="margin-tb">
                 <Container>
                 <Row>
-                    <Col className="noPadding" lg="3"><Form.Control placeholder="Enter RSN..."/></Col>
-                    <Col><Button variant="primary">Search</Button>{' '}</Col>
+                    <Col className="noPadding" lg="3">
+                        <Form.Control 
+                            placeholder="Enter RSN..."
+                            value={rsn}
+                            onChange={input => setRsn(input.target.value)}
+                        />
+                    </Col>
+                    <Col>
+                    <Button 
+                        variant="primary"
+                        onClick={submitRsn}
+                    >
+                        Search
+                    </Button>{' '}</Col>
                 </Row>
                 </Container>
             </div>
@@ -413,7 +451,13 @@ function App() {
                                     Magic
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            <Form.Control className="stat-input" type="number" id="magic"/>
+                            <Form.Control 
+                                className="stat-input" 
+                                type="number" 
+                                id="magic"
+                                value={levels.magic}
+                                onChange={level => onLevelChange(parseInt(level.target.value), "magic")}
+                            />
                         </InputGroup>
                     </Col>
                     <Col lg="3"><Select
@@ -437,15 +481,23 @@ function App() {
                                     Ranged
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            <Form.Control className="stat-input" type="number" id="ranged"/>
+                            <Form.Control 
+                                className="stat-input" 
+                                type="number" 
+                                id="ranged"
+                                value={levels.ranged}
+                                onChange={level => onLevelChange(parseInt(level.target.value), "ranged")}
+                            />
                         </InputGroup>
                     </Col>
                     <Col lg="3"><Select
                         isClearable
+                        options={RANGED_POTIONS}
                         placeholder={`Potion`}
                     /></Col>
                     <Col lg="3"><Select
                         isClearable
+                        options={RANGED_PRAYERS}
                         placeholder={`Prayer`}
                     /></Col>
                     </Row>
