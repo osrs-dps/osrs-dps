@@ -31,11 +31,11 @@ const DEFENCE_STYLE_MAP = {
 };
 
 const ATTACK_STYLE_MAP = {
-    Stab: "stabatt",
-    Slash: "slashatt",
-    Crush: "crushatt",
-    Magic: "magicatt",
-    Ranged: "rangeatt"
+    Stab: "stab_att",
+    Slash: "slash_att",
+    Crush: "crush_att",
+    Magic: "magic_att",
+    Ranged: "range_att"
 };
 
 const STR_PRAYERS = [
@@ -94,7 +94,7 @@ const monsterOptions = parseJSONSelector(monsterData);
 function parseJSONSelector(slot){
     var ret = []
     for(var i = 0 ; i < slot.length ; i++){
-        ret[i] = {value: slot[i].Name, label: slot[i].Name}
+        ret[i] = {value: slot[i].name, label: slot[i].name}
     }
     return ret;
 }
@@ -218,7 +218,7 @@ function App() {
     const totalAttBonus = _.reduce(SLOT_NAMES, (total, key) => {
         return total + ((equips[key] && attStyle.attAccStyle)? parseInt(equips[key][attStyle.attAccStyle]) : 0);
     }, 0);
-    //change slashatt for other styles
+    //change slash_att for other styles
 
     const onAttPotionChange = (potion) => {
         let base = 0;
@@ -324,7 +324,7 @@ function App() {
                             className="equipment-slot"
                             placeholder={`Select ${type}...`}
                             options={slotOptions[type]}
-                            value={equips[type] && {value: equips[type].Name, label: equips[type].Name}}
+                            value={equips[type] && {value: equips[type].name, label: equips[type].name}}
                             onChange={itemId => onEquipChange(itemId, type)}
                         />
                     </div>
@@ -347,7 +347,7 @@ function App() {
                     className="equipment-slot margin-tb"
                     placeholder={`Select Enemy...`}
                     options={monsterOptions}
-                    value={monsterOptions && monsterOptions.Name}
+                    value={monsterOptions && monsterOptions.name}
                     onChange={monsterId => onMonsterChange(monsterId)}
                 />
             </div>
