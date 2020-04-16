@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import './App.css';
 import slotData from './slot_data';
 import monsterData from './data/monsters.json';
-import attackStyles from "./data/attack_styles.json";
+import allAttackStyles from "./data/attack_styles.json";
 import _ from 'lodash';
 import 'bootstrap/dist/css/bootstrap.css';
-import {Container, Row, Col, Form, InputGroup, Button, Table} from 'react-bootstrap';
+import {Container, Row, Col, Form, InputGroup, Button} from 'react-bootstrap';
 import Select from 'react-select';
 
 const SLOT_NAMES = [
@@ -23,11 +23,11 @@ const SLOT_NAMES = [
 ];
 
 const DEFENCE_STYLE_MAP = {
-    Stab: "stabDef",
-    Slash: "slashDef",
-    Crush: "crushDef",
-    Magic: "magicDef",
-    Ranged: "rangeDef"
+    Stab: "stab_def",
+    Slash: "slash_def",
+    Crush: "crush_def",
+    Magic: "magic_def",
+    Ranged: "range_def"
 };
 
 const ATTACK_STYLE_MAP = {
@@ -89,6 +89,36 @@ const slotOptions = _.reduce(SLOT_NAMES, (acc, key) => {
     return {...acc, [key]: parseJSONSelector(slotData[key])};
 }, {});
 
+const DEFAULT_MONSTER = {
+    name: null,
+    location: null,
+    exp_bonus: null,
+    combat_level: 0,
+    hitpoints: 0,
+    attack_level: 0,
+    defence_level: 0,
+    strength_level: 0,
+    magic_level: 0,
+    ranged_level: 0,
+    attack_style: null,
+    attack_speed: 0,
+    stab_attack: 0,
+    slash_attack: 0,
+    crush_attack: 0,
+    magic_attack: 0,
+    ranged_attack: 0,
+    attack_bonus: 0,
+    melee_strength: 0,
+    ranged_strength: 0,
+    stab_def: 0,
+    slash_def: 0,
+    crush_def: 0,
+    magic_def: 0,
+    ranged_def: 0,
+    interval: null,
+    type: null
+};
+
 const monsterOptions = parseJSONSelector(monsterData);
 
 function parseJSONSelector(slot){
@@ -109,8 +139,8 @@ function App() {
         let item = null;
         let clearShield = false;
         if(selected) {
-            item = _.find(slotData[type], {Name: selected.value});
-            if(type === "weapon" && item.twoHand){
+            item = _.find(slotData[type], {name: selected.value});
+            if(type === "weapon" && item.two_handed){
                 clearShield = true;
             }
         }
@@ -255,47 +285,18 @@ function App() {
     //salve, slayer, arclight, dchb, dhl, wildy weapons, tbow
 
     //########## Enemy Defence Calcs ##########
-    const initialState = {
-        Name: null,
-        Location: null,
-        expBonus: null,
-        combatLevel: 0,
-        hitpoints: 0,
-        attackLevel: 0,
-        defenceLevel: 0,
-        strengthLevel: 0,
-        magicLevel: 0,
-        rangedLevel: 0,
-        attackStyle: null,
-        attackSpeed: 0,
-        stabAttack: 0,
-        slashAttack: 0,
-        crushAttack: 0,
-        magicAttack: 0,
-        rangedAttack: 0,
-        attackBonus: 0,
-        meleeStrength: 0,
-        rangedStrengh: 0,
-        stabDef: 0,
-        slashDef: 0,
-        crushDef: 0,
-        magicDef: 0,
-        rangedDef: 0,
-        interval: null,
-        Type: null
-    };
-    const [monster, setMonster] = useState(initialState)
+    const [monster, setMonster] = useState(DEFAULT_MONSTER)
 
     const onMonsterChange = (monsterId) => {
-        let monster = initialState;
+        let monster = DEFAULT_MONSTER;
         if(monsterId) {
-            monster = _.find(monsterData, {Name: monsterId.value});
+            monster = _.find(monsterData, {name: monsterId.value});
         }
         console.log(JSON.stringify(monster));
         setMonster(monster);
     };
 
-    const effectiveDefence = monster.defenceLevel + 9;
+    const effectiveDefence = monster.defence_level + 9;
 
     const monsterDefStyle = attStyle.style ? monster[attStyle.attDefStyle] : 0;
 
@@ -304,7 +305,12 @@ function App() {
     const hitChance = maxAttRoll > maxDefenceRoll ? 1 - (maxDefenceRoll + 2) / (2 * (maxAttRoll + 1)):
     maxAttRoll / (2 * (maxDefenceRoll + 1));
 
-    const dps = hitChance * (maxHit / 2) / (6 - (equips.weapon?equips.weapon.attackSpeed:5) * 0.6);
+    const dps = hitChance * (maxHit / 2) / (6 - (equips.weapon?equips.weapon.attack_speed:5) * 0.6);
+
+    let availableAttackStyles = [];
+    if(equips.weapon) {
+        availableAttackStyles = _.find(allAttackStyles, {id: equips.weapon.attack_style_id})?.styles || [];
+    }
 
     return (
 
@@ -320,7 +326,7 @@ function App() {
                     <div key={type} className="margin-tb">
                         <Select
                             isClearable
-                            isDisabled={type==="shield" && equips.weapon && equips.weapon.twoHand}
+                            isDisabled={type==="shield" && equips.weapon && equips.weapon.two_handed}
                             className="equipment-slot"
                             placeholder={`Select ${type}...`}
                             options={slotOptions[type]}
@@ -334,11 +340,7 @@ function App() {
                     isClearable
                     className="equipment-slot margin-tb"
                     placeholder={`Select Attack Style...`}
-                    options={_.find(attackStyles, function(o){
-                        return equips.weapon ? o.optionNum === equips.weapon.attackStyles:null;
-                    }) ? _.find(attackStyles, function(o){
-                        return equips.weapon ? o.optionNum === equips.weapon.attackStyles:null;
-                    }).styles : []}
+                    options={availableAttackStyles}
                     onChange={style => onAttStyleChange(style)}
                 />
 
