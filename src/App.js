@@ -9,20 +9,7 @@ import Select from 'react-select';
 import PlayerStats from './components/PlayerStats';
 import ResultsPanel from './components/ResultsPanel';
 
-const SLOT_NAMES = [
-    'weapon',
-    'shield',
-    'ammo',
-    'head',
-    'cape',
-    'amulet',
-    'chest',
-    'legs',
-    'gloves',
-    'boots',
-    'ring',
-];
-
+import {SLOT_NAMES} from './lib/constants';
 
 const slotOptions = _.reduce(SLOT_NAMES, (acc, key) => {
     return {...acc, [key]: parseJSONSelector(slotData[key])};
@@ -112,6 +99,7 @@ function App() {
             item = _.find(slotData[type], {name: selected.value});
             if(type === "weapon" && item.two_handed){
                 clearShield = true;
+                // todo: clear attack style if the styles changed
             }
         }
         if(clearShield){
@@ -133,7 +121,16 @@ function App() {
     return (
 
         <div className="App">
+            <ResultsPanel equips={equips} stats={stats} monster={monster} />
             <div className="equipment-wrapper">
+                <Select
+                    isClearable
+                    className="equipment-slot margin-tb"
+                    placeholder={`Select Attack Style...`}
+                    options={availableAttackStyles}
+                    value={equips.attackStyle}
+                    onChange={style => setEquips({...equips, attackStyle: style})}
+                />
                 {SLOT_NAMES.map(type => (
                     <div key={type} className="margin-tb">
                         <Select
@@ -147,14 +144,6 @@ function App() {
                         />
                     </div>
                 ))}
-
-                <Select
-                    isClearable
-                    className="equipment-slot margin-tb"
-                    placeholder={`Select Attack Style...`}
-                    options={availableAttackStyles}
-                    onChange={style => onEquipChange(style, 'attackStyle')}
-                />
 
                 <Select
                     isClearable
@@ -183,8 +172,6 @@ function App() {
                     <input className="checkbox" type="checkbox" id="dwh"></input>
                 </div>
             </div>
-
-            <ResultsPanel equips={equips} stats={stats} monster={monster} />
         </div>
     );
 }

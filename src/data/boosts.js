@@ -1,9 +1,9 @@
 
 export default {
     STR_PRAYERS: [
-        {id: 1, value: 1.23, label: "Piety"},
-        {id: 2, value: 1.18, label: "Chivalry"},
-        {id: 3, value: 1.15, label: "Ultimate Strength"},
+        {id: 1, multiplier: 1.23, label: "Piety"},
+        {id: 2, multiplier: 1.18, label: "Chivalry"},
+        {id: 3, multiplier: 1.15, label: "Ultimate Strength"},
     ],
 
     STR_POTIONS: [
@@ -13,9 +13,9 @@ export default {
     ],
 
     ATT_PRAYERS: [
-        {id: 1, value: 1.20, label: "Piety"},
-        {id: 2, value: 1.15, label: "Chivalry"},
-        {id: 3, value: 1.15, label: "Incredible Reflexes"},
+        {id: 1, multiplier: 1.20, label: "Piety"},
+        {id: 2, multiplier: 1.15, label: "Chivalry"},
+        {id: 3, multiplier: 1.15, label: "Incredible Reflexes"},
     ],
 
     ATT_POTIONS: [
