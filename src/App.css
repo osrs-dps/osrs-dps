@@ -82,12 +82,17 @@ div.noMargin {
   margin-right: 0;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .input-group-text{
   width: 87px;
+}
+
+.App {
+  padding-left: 20px;
+  padding-top: 20px;
 }
