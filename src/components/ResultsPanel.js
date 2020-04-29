@@ -1,7 +1,6 @@
 import React from 'react';
 import calculateResults from '../lib/calc';
 
-
 function ResultsPanel({stats, equips, monster}) {
 
     const calculations = calculateResults(stats, equips, monster);
