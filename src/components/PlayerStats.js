@@ -19,7 +19,7 @@ function IdSelect({value, options, onChange, ...rest}) {
 
 function PlayerStats({stats, onStatChange}) {
     return (
-        <div className="stats-wrapper">
+        <div>
             <div className="margin-tb">
                 <Container>
                     <Row>

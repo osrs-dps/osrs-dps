@@ -121,42 +121,49 @@ function App() {
     return (
 
         <div className="App">
-            <ResultsPanel equips={equips} stats={stats} monster={monster} />
-            <div className="equipment-wrapper">
-                <Select
-                    isClearable
-                    className="equipment-slot margin-tb"
-                    placeholder={`Select Attack Style...`}
-                    options={availableAttackStyles}
-                    value={equips.attackStyle}
-                    onChange={style => setEquips({...equips, attackStyle: style})}
-                />
-                {SLOT_NAMES.map(type => (
-                    <div key={type} className="margin-tb">
-                        <Select
-                            isClearable
-                            isDisabled={type==="shield" && equips.weapon && equips.weapon.two_handed}
-                            className="equipment-slot"
-                            placeholder={`Select ${type}...`}
-                            options={slotOptions[type]}
-                            value={equips[type] && {value: equips[type].name, label: equips[type].name}}
-                            onChange={itemId => onEquipChange(itemId, type)}
-                        />
-                    </div>
-                ))}
-
-                <Select
-                    isClearable
-                    className="equipment-slot margin-tb"
-                    placeholder={`Select Enemy...`}
-                    options={monsterOptions}
-                    value={monsterOptions && monsterOptions.name}
-                    onChange={monsterId => onMonsterChange(monsterId)}
-                />
+            <div className='row'>
+                <div className='col-md-3'>
+                    <Select
+                        isClearable
+                        className="equipment-slot margin-tb"
+                        placeholder={`Select Attack Style...`}
+                        options={availableAttackStyles}
+                        value={equips.attackStyle}
+                        onChange={style => setEquips({...equips, attackStyle: style})}
+                    />
+                    {SLOT_NAMES.map(type => (
+                        <div key={type} className="margin-tb">
+                            <Select
+                                isClearable
+                                isDisabled={type==="shield" && equips.weapon && equips.weapon.two_handed}
+                                className="equipment-slot"
+                                placeholder={`Select ${type}...`}
+                                options={slotOptions[type]}
+                                value={equips[type] && {value: equips[type].name, label: equips[type].name}}
+                                onChange={itemId => onEquipChange(itemId, type)}
+                            />
+                        </div>
+                    ))}
+                </div>
+                <div className='col-md-6'>
+                    <ResultsPanel equips={equips} stats={stats} monster={monster} />
+                    <Select
+                        isClearable
+                        className="equipment-slot margin-tb"
+                        placeholder={`Select Enemy...`}
+                        options={monsterOptions}
+                        value={monsterOptions && monsterOptions.name}
+                        onChange={monsterId => onMonsterChange(monsterId)}
+                    />
+                    <PlayerStats stats={stats} onStatChange={onStatChange} />
+                </div>
+                <div className='col-md-3'>
+                    &nbsp;
+                </div>
             </div>
 
 
-            <PlayerStats stats={stats} onStatChange={onStatChange} />
+
 
             <div className="checkbox-wrapper">
                 <div className="">
