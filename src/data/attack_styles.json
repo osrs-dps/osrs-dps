@@ -433,9 +433,9 @@
             {
                 "value": {
                     "style": "Rapid",
-                    "type": "ranged"
+                    "type": "Ranged"
                 },
-                "label": "Rapid ranged"
+                "label": "Rapid Ranged"
             },
             {
                 "value": {
