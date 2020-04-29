@@ -32,7 +32,7 @@ function PlayerStats({stats, onStatChange}) {
                                 </InputGroup.Prepend>
                                 <Form.Control
                                     type="number"
-                                    class="stat-input"
+                                    className="stat-input"
                                     id="attack"
                                     value={stats.attack}
                                     onChange={e => onStatChange(parseInt(e.target.value), 'attack')}
