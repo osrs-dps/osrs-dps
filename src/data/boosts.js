@@ -25,12 +25,12 @@ export default {
     ],
 
     RANGED_PRAYERS: [
-        { id: 1, label: "Rigour", str: 1.23, acc: 1.20 },
-        { id: 2, label: "Eagle Eye", str: 1.15, acc: 1.15 },
+        {id: 1, label: "Rigour", str: 1.23, acc: 1.20 },
+        {id: 2, label: "Eagle Eye", str: 1.15, acc: 1.15 },
     ],
 
     RANGED_POTIONS: [
-        {id: 1, label: "Ranging Potion"},
-        {id: 2, label: "Overload (+)"},
+        {id: 1, base: 4, multiplier: 0.1, label: "Ranging Potion"},
+        {id: 2, base: 6, multiplier: 0.16, label: "Overload (+)"},
     ],
 };
