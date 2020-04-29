@@ -11,7 +11,7 @@ function IdSelect({value, options, onChange, ...rest}) {
         <Select
             options={boostOptions(options)}
             value={value && _.find(options, {id: value})}
-            onChange={selected => onChange(selected?.id)}
+            onChange={selected => onChange(selected?.value)}
             {...rest}
         />
     );
