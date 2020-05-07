@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 
 function MonsterPanel({monster}) {
     const monsterStatsIWannaShow = [
@@ -15,12 +16,15 @@ function MonsterPanel({monster}) {
 
     return (
         <div className="stats">
-            {monsterStatsIWannaShow.map(field => (
-                <div key={field}>
-                    <div className="stat-left">{field}</div>
-                    <div className="stat-right">{monster[field]}</div>
-                </div>
-            ))}
+            {monsterStatsIWannaShow.map(field => {
+                const val = monster[field];
+                return (
+                    <div key={field}>
+                        <div className="stat-left">{field}</div>
+                        <div className="stat-right">{(_.isNil(val) || val === '') ? 'N/A' : val}</div>
+                    </div>
+                );
+            })}
         </div>
     )
 }

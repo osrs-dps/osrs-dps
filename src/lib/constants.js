@@ -27,3 +27,11 @@ export const ATTACK_STYLE_MAP = {
     Magic: "magic_att",
     Ranged: "range_att"
 };
+
+export const STRENGTH_STYLE_MAP = {
+    Stab: "str",
+    Slash: "str",
+    Crush: "str",
+    Magic: "magic_str",
+    Ranged: "range_str"
+};
