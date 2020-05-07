@@ -10,19 +10,23 @@ function potionBuff(level, potion) {
     return potion.base + Math.floor(level * potion.multiplier);
 }
 
+function equipTotal(equips, field) {
+    return _.reduce(SLOT_NAMES, (total, key) => {
+        return total + (equips[key] ? parseInt(equips[key][field]) : 0);
+    }, 0);
+}
+
 function calc(stats, equips, monster) {
+    const rangedPotion = _.find(BOOSTS.RANGED_POTIONS, {id: stats.rangedPotionId}) || {base: 0, multiplier: 0};
+    const rangedPrayer = _.find(BOOSTS.RANGED_PRAYERS, {id: stats.rangedPrayerId}) || {acc: 1, str: 1};
+
     if(equips.attackStyle?.value?.type === "Ranged"){
-        console.log(JSON.stringify(stats));
-        const rangedPotion = _.find(BOOSTS.RANGED_POTIONS, {id: stats.rangedPotionId}) || {base: 0, multiplier: 0};
-        const rangedPrayer = _.find(BOOSTS.RANGED_PRAYERS, {id: stats.rangedPrayerId}) || {acc: 1, str: 1};  
 
-        const totalStrBonus = _.reduce(SLOT_NAMES, (total, key) => {
-            return total + (equips[key] ? parseInt(equips[key].range_str) : 0);
-        }, 0);
+        const totalStrBonus = equipTotal(equips, 'range_str');
 
-        const rangedPotionBonus = potionBuff(stats.strength, rangedPotion);
+        const rangedPotionBonus = potionBuff(stats.ranged, rangedPotion);
 
-        const effectiveStr = Math.floor(((stats.strength + rangedPotionBonus) * rangedPrayer.str * 1));
+        const effectiveStr = Math.floor(((stats.ranged + rangedPotionBonus) * rangedPrayer.str * 1));
         const baseDamage = Math.floor( 1.3 + (effectiveStr/10) + (totalStrBonus/80) + ((effectiveStr*totalStrBonus)/640) );
 
         const specialBonus = 1;
@@ -37,12 +41,11 @@ function calc(stats, equips, monster) {
 
         const attPotionBonus = potionBuff(stats.ranged, rangedPotion);
 
-        const effectiveAtt = Math.floor(((stats.attack + attPotionBonus) * rangedPrayer.acc * 1) + styleAttBonus + 8);
+        const effectiveAtt = Math.floor(((stats.ranged + attPotionBonus) * rangedPrayer.acc * 1) + styleAttBonus + 8);
         // todo: attack style, void, slayer helm, void
 
         const maxAttRoll = effectiveAtt * (totalAttBonus + 64) * 1;
         // salve, slayer, arclight, dchb, dhl, wildy weapons, tbow
-
 
         // ########## Enemy Defence Calcs ##########
 
@@ -81,7 +84,7 @@ function calc(stats, equips, monster) {
         };
     }
     else if(equips.attackStyle?.value?.type === "Magic"){
-        
+
     }
     else{
         // ########## Strength Calcs ##########
