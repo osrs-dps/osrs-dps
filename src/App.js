@@ -118,19 +118,20 @@ function App() {
 
     const onEquipChange = (selected, type) => {
         let item = null;
-        let clearShield = false;
         if(selected) {
             item = _.find(slotData[type], {name: selected.value});
-            if(type === 'weapon'){
-                clearShield = item.two_handed;
-                // todo: clear attack style if the styles changed
+        }
+        let changeset = {...equips, [type]: item};
+
+        if(type === 'weapon') {
+            if(item?.two_handed) {
+                changeset.shield = null;
+            }
+            if(equips.weapon?.attack_style_id !== item?.attack_style_id) {
+                changeset.attackStyle = null
             }
         }
-        if(clearShield){
-            setEquips({...equips, shield: null, [type]: item});
-        } else {
-            setEquips({...equips, [type]: item});
-        }
+        setEquips(changeset);
     };
 
     const onStatChange = (value, type) => {
