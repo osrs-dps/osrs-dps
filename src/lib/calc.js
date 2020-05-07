@@ -17,6 +17,20 @@ function equipTotal(equips, field) {
 }
 
 function calc(stats, equips, monster) {
+    if(!equips.attackStyle) {
+        return {
+            dps: 'N/A',
+            maxHit: 'N/A',
+            totalAttBonus: 'N/A',
+            effectiveAtt: 'N/A',
+            maxAttRoll: 'N/A',
+            maxDefenceRoll: 'N/A',
+            hitChance: 'N/A',
+            totalStrBonus: 'N/A',
+            effectiveStr: 'N/A',
+            baseDamage: 'N/A',
+        };
+    }
     const rangedPotion = _.find(BOOSTS.RANGED_POTIONS, {id: stats.rangedPotionId}) || {base: 0, multiplier: 0};
     const rangedPrayer = _.find(BOOSTS.RANGED_PRAYERS, {id: stats.rangedPrayerId}) || {acc: 1, str: 1};
 

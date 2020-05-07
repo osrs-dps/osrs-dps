@@ -5,88 +5,33 @@ function ResultsPanel({stats, equips, monster}) {
 
     const calculations = calculateResults(stats, equips, monster);
 
+    const rows = [
+        {label: 'Damage Per Second', field: 'dps', round: true},
+        {label: 'Max hit', field: 'maxHit'},
+        {label: 'Attack Bonus', field: 'totalAttBonus'},
+        {label: 'Effective Attack', field: 'effectiveAtt'},
+        {label: 'Max Attack Roll', field: 'maxAttRoll'},
+        {label: 'Max Defence Roll', field: 'maxDefenceRoll'},
+        {label: 'Accuracy', field: 'hitChance', round: true},
+        {label: 'Strength bonus', field: 'totalStrBonus'},
+        {label: 'Effective Strength', field: 'effectiveStr'},
+        {label: 'Base Damage', field: 'baseDamage'},
+    ];
+
     return (
         <div className="stats">
-            <div>
-                <div className="stat-left">
-                    Damage Per Second
-                </div>
-                <div className="stat-right">
-                    {parseFloat(calculations.dps.toFixed(6))}
-                </div>
-            </div>
-            <div>
-                <div className="stat-left">
-                    Max hit
-                </div>
-                <div className="stat-right">
-                    {calculations.maxHit}
-                </div>
-            </div>
-            <div>
-                <div className="stat-left">
-                    Attack Bonus
-                </div>
-                <div className="stat-right">
-                    {calculations.totalAttBonus}
-                </div>
-            </div>
-            <div>
-                <div className="stat-left">
-                    Effective Attack
-                </div>
-                <div className="stat-right">
-                    {calculations.effectiveAtt}
-                </div>
-            </div>
-            <div>
-                <div className="stat-left">
-                    Max Attack Roll
-                </div>
-                <div className="stat-right">
-                    {calculations.maxAttRoll}
-                </div>
-            </div>
-            <div>
-                <div className="stat-left">
-                    Max Defence Roll
-                </div>
-                <div className="stat-right">
-                    {calculations.maxDefenceRoll}
-                </div>
-            </div>
-            <div>
-                <div className="stat-left">
-                    Accuracy
-                </div>
-                <div className="stat-right">
-                    {parseFloat(calculations.hitChance.toFixed(6))}
-                </div>
-            </div>
-            <div>
-                <div className="stat-left">
-                    Strength bonus
-                </div>
-                <div className="stat-right">
-                    {calculations.totalStrBonus}
-                </div>
-            </div>
-            <div>
-                <div className="stat-left">
-                    Effective Strength
-                </div>
-                <div className="stat-right">
-                    {calculations.effectiveStr}
-                </div>
-            </div>
-            <div>
-                <div className="stat-left">
-                    Base Damage
-                </div>
-                <div className="stat-right">
-                    {calculations.baseDamage}
-                </div>
-            </div>
+            {rows.map(row => {
+                let stat = calculations[row.field];
+                if(row.round && stat.toFixed) {
+                    stat = stat.toFixed(6);
+                }
+                return (
+                    <div key={row.label}>
+                        <div className="stat-left">{row.label}</div>
+                        <div className="stat-right">{stat}</div>
+                    </div>
+                );
+            })}
         </div>
     )
 }

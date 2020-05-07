@@ -10,7 +10,11 @@ import PlayerStats from './components/PlayerStats';
 import ResultsPanel from './components/ResultsPanel';
 import MonsterPanel from './components/MonsterPanel';
 
-import {SLOT_NAMES} from './lib/constants';
+import {
+    SLOT_NAMES,
+    ATTACK_STYLE_MAP,
+    STRENGTH_STYLE_MAP,
+} from './lib/constants';
 
 const slotOptions = _.reduce(SLOT_NAMES, (acc, key) => {
     return {...acc, [key]: parseJSONSelector(slotData[key])};
@@ -87,6 +91,9 @@ function getAttackStylesFromWeapon(weapon) {
 }
 
 function renderSlotSelector(type, options, equips, onEquipChange) {
+    const styleType = equips.attackStyle?.value?.type;
+    const attBonusField = ATTACK_STYLE_MAP[styleType];
+    const strBonusField = STRENGTH_STYLE_MAP[styleType];
     return (
         <div key={type} className="margin-tb">
             <Select
@@ -98,6 +105,7 @@ function renderSlotSelector(type, options, equips, onEquipChange) {
                 value={equips[type] && {value: equips[type].name, label: equips[type].name}}
                 onChange={itemId => onEquipChange(itemId, type)}
             />
+            {styleType && <span>{'        '}str: {equips[type] && equips[type][strBonusField]} - att: {equips[type] && equips[type][attBonusField]}</span>}
         </div>
     );
 }
@@ -144,7 +152,7 @@ function App() {
 
         <div className="App">
             <div className='row'>
-                <div className='col-md-3'>
+                <div className='col-md-4'>
                     {renderSlotSelector('weapon', slotOptions.weapon, equips, onEquipChange)}
                     <div className="margin-tb">
                         <Select

@@ -148,13 +148,4 @@ function PlayerStats({stats, onStatChange}) {
 
 }
 
-
-
-
-
-
-
-
-
-
 export default PlayerStats;
