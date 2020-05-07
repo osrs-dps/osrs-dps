@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Select from 'react-select';
 import PlayerStats from './components/PlayerStats';
 import ResultsPanel from './components/ResultsPanel';
+import MonsterPanel from './components/MonsterPanel';
 
 import {SLOT_NAMES} from './lib/constants';
 
@@ -78,6 +79,29 @@ const DEFAULT_EQUIPS = _.reduce(SLOT_NAMES, (acc, key) => {
 
 DEFAULT_EQUIPS.attackStyle = null;
 
+function getAttackStylesFromWeapon(weapon) {
+    if(!weapon) {
+        return [];
+    }
+    return _.find(allAttackStyles, {id: weapon.attack_style_id})?.styles || [];
+}
+
+function renderSlotSelector(type, options, equips, onEquipChange) {
+    return (
+        <div key={type} className="margin-tb">
+            <Select
+                isClearable
+                isDisabled={type==="shield" && equips.weapon?.two_handed}
+                className="equipment-slot"
+                placeholder={`Select ${type}...`}
+                options={options}
+                value={equips[type] && {value: equips[type].name, label: equips[type].name}}
+                onChange={itemId => onEquipChange(itemId, type)}
+            />
+        </div>
+    );
+}
+
 function App() {
 
     const [equips, setEquips] = useState(DEFAULT_EQUIPS);
@@ -97,8 +121,8 @@ function App() {
         let clearShield = false;
         if(selected) {
             item = _.find(slotData[type], {name: selected.value});
-            if(type === "weapon" && item.two_handed){
-                clearShield = true;
+            if(type === 'weapon'){
+                clearShield = item.two_handed;
                 // todo: clear attack style if the styles changed
             }
         }
@@ -113,37 +137,25 @@ function App() {
         setStats({...stats, [type]: value});
     };
 
-    let availableAttackStyles = [];
-    if(equips.weapon) {
-        availableAttackStyles = _.find(allAttackStyles, {id: equips.weapon.attack_style_id})?.styles || [];
-    }
+    let availableAttackStyles = getAttackStylesFromWeapon(equips.weapon);
 
     return (
 
         <div className="App">
             <div className='row'>
                 <div className='col-md-3'>
-                    <Select
-                        isClearable
-                        className="equipment-slot margin-tb"
-                        placeholder={`Select Attack Style...`}
-                        options={availableAttackStyles}
-                        value={equips.attackStyle}
-                        onChange={style => setEquips({...equips, attackStyle: style})}
-                    />
-                    {SLOT_NAMES.map(type => (
-                        <div key={type} className="margin-tb">
-                            <Select
-                                isClearable
-                                isDisabled={type==="shield" && equips.weapon && equips.weapon.two_handed}
-                                className="equipment-slot"
-                                placeholder={`Select ${type}...`}
-                                options={slotOptions[type]}
-                                value={equips[type] && {value: equips[type].name, label: equips[type].name}}
-                                onChange={itemId => onEquipChange(itemId, type)}
-                            />
-                        </div>
-                    ))}
+                    {renderSlotSelector('weapon', slotOptions.weapon, equips, onEquipChange)}
+                    <div className="margin-tb">
+                        <Select
+                            isClearable
+                            className="equipment-slot"
+                            placeholder={`Select Attack Style...`}
+                            options={availableAttackStyles}
+                            value={equips.attackStyle}
+                            onChange={style => setEquips({...equips, attackStyle: style})}
+                        />
+                    </div>
+                    {_.without(SLOT_NAMES, 'weapon').map(type => renderSlotSelector(type, slotOptions[type], equips, onEquipChange))}
                 </div>
                 <div className='col-md-6'>
                     <ResultsPanel equips={equips} stats={stats} monster={monster} />
@@ -155,15 +167,13 @@ function App() {
                         value={monsterOptions && monsterOptions.name}
                         onChange={monsterId => onMonsterChange(monsterId)}
                     />
+                    <MonsterPanel monster={monster} />
                     <PlayerStats stats={stats} onStatChange={onStatChange} />
                 </div>
                 <div className='col-md-3'>
                     &nbsp;
                 </div>
             </div>
-
-
-
 
             <div className="checkbox-wrapper">
                 <div className="">
