@@ -56,21 +56,21 @@
 }
 .stat-left{
   display: inline-block;
-  border-top: solid black 1px;
-  border-left: solid black 1px;
-  border-right:solid black 1px;
+  border-top: solid #ddd 1px;
+  border-left: solid #ddd 1px;
+  border-right:solid #ddd 1px;
   width: 150px;
   text-align: center;
 }
 .stat-right{
   display: inline-block;
-  border-top: solid black 1px;
-  border-right: solid black 1px;
+  border-top: solid #ddd 1px;
+  border-right: solid #ddd 1px;
   width: 100px;
   text-align: center;
 }
 .stat-bottom{
-  border-bottom: solid black 1px;
+  border-bottom: solid #ddd 1px;
 }
 
 div.noPadding {
@@ -96,4 +96,6 @@ input[type=number]::-webkit-outer-spin-button {
 .App {
   padding-left: 20px;
   padding-top: 20px;
+  background-color: #5a5a5a;
+  color: #ddd;
 }
