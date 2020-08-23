@@ -3,6 +3,7 @@ import _ from 'lodash';
 import slotData from '../slot_data';
 import Select from 'react-select';
 import allAttackStyles from '../data/attack_styles.json';
+import { Button } from 'react-bootstrap';
 
 import {
   SLOT_NAMES,
@@ -51,7 +52,7 @@ function renderSlotSelector(type, equips, onEquipChange) {
   );
 }
 
-export default function ({ equips, setEquips }) {
+export default function ({ equips, setEquips, remove }) {
   const availableAttackStyles = getAttackStylesFromWeapon(equips.weapon);
 
   const onEquipChange = (selected, type) => {
@@ -74,6 +75,7 @@ export default function ({ equips, setEquips }) {
 
   return (
     <div>
+      <Button variant='danger' onClick={remove}>remove this card</Button>
       {renderSlotSelector('weapon', equips, onEquipChange)}
       <div className='equipment-row'>
         <img src='/images/attack_styles.png' alt='attack style' />

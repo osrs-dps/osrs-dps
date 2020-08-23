@@ -49,10 +49,6 @@
   margin-left: 5px;
 }
 
-.stats{
-  margin-left:100px;
-  margin-top: 25px;
-}
 .stat-left{
   display: inline-block;
   border-top: solid black 1px;
@@ -100,4 +96,8 @@ input[type=number]::-webkit-outer-spin-button {
   padding-left: 20px;
   padding-top: 20px;
   background-color: #bbb;
+}
+
+.gear-card {
+  width: 300px;
 }

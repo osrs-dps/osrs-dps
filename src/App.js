@@ -10,6 +10,7 @@ import ResultsPanel from './components/ResultsPanel';
 import MonsterPanel from './components/MonsterPanel';
 import GearSelector from './components/GearSelector';
 import { useArrayState } from './lib/custom_hooks';
+import { Button } from 'react-bootstrap';
 
 import { SLOT_NAMES } from './lib/constants';
 
@@ -78,8 +79,7 @@ DEFAULT_EQUIPS.attackStyle = null;
 
 function App() {
 
-    const [equips, setEquips] = useState(DEFAULT_EQUIPS);
-    // useArrayState
+    const [equipSets, addEquipSet, removeEquipSet, editEquipSet] = useArrayState(DEFAULT_EQUIPS);
     const [stats, setStats] = useState(DEFAULT_STATS);
     const [monster, setMonster] = useState(DEFAULT_MONSTER);
 
@@ -99,13 +99,7 @@ function App() {
 
         <div className="App">
             <div className='row'>
-                <div className='col-md-4'>
-                    <GearSelector
-                        equips={equips}
-                        setEquips={setEquips} />
-                </div>
                 <div className='col-md-6'>
-                    <ResultsPanel equips={equips} stats={stats} monster={monster} />
                     <Select
                         isClearable
                         placeholder='Select Enemy...'
@@ -114,26 +108,38 @@ function App() {
                         onChange={monsterId => onMonsterChange(monsterId)}
                     />
                     <MonsterPanel monster={monster} />
-                    <PlayerStats stats={stats} onStatChange={onStatChange} />
                 </div>
-                <div className='col-md-2'>
-                    &nbsp;
+                <div className='col-md-6'>
+                    <PlayerStats stats={stats} onStatChange={onStatChange} />
+                    <div className="checkbox-wrapper">
+                        <div className="">
+                            <label className="checkbox-label" htmlFor="wild">Wilderness</label>
+                            <input className="checkbox" type="checkbox" id="wild"></input>
+                        </div>
+                        <div className="">
+                            <label className="checkbox-label" htmlFor="kandarin">Kandarin</label>
+                            <input className="checkbox" type="checkbox" id="kandarin"></input>
+                        </div>
+                        <div className="">
+                            <label className="checkbox-label" htmlFor="dwh">Dragon warhammer</label>
+                            <input className="checkbox" type="checkbox" id="dwh"></input>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div className="checkbox-wrapper">
-                <div className="">
-                    <label className="checkbox-label" htmlFor="wild">Wilderness</label>
-                    <input className="checkbox" type="checkbox" id="wild"></input>
-                </div>
-                <div className="">
-                    <label className="checkbox-label" htmlFor="kandarin">Kandarin</label>
-                    <input className="checkbox" type="checkbox" id="kandarin"></input>
-                </div>
-                <div className="">
-                    <label className="checkbox-label" htmlFor="dwh">Dragon warhammer</label>
-                    <input className="checkbox" type="checkbox" id="dwh"></input>
-                </div>
+            <div className='row'>
+                <Button onClick={addEquipSet}>Add gear card</Button>
+            </div>
+            <div className='row'>
+                {equipSets.map((equipSet, index) => (
+                    <div className='gear-card' key={index}>
+                        <GearSelector
+                            equips={equipSet}
+                            setEquips={equips => editEquipSet(index, equips)}
+                            remove={() => removeEquipSet(index)} />
+                        <ResultsPanel equips={equipSet} stats={stats} monster={monster} />
+                    </div>
+                ))}
             </div>
         </div>
     );
