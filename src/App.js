@@ -20,23 +20,6 @@ const slotOptions = _.reduce(SLOT_NAMES, (acc, key) => {
     return {...acc, [key]: parseJSONSelector(slotData[key])};
 }, {});
 
-const reactSelectStyles = {
-    option: (provided) => ({
-        ...provided,
-        color: '#ddd',
-        backgroundColor: '#5a5a5a'
-    }),
-    valueContainer: (provided) => ({
-        ...provided,
-        color: '#ddd',
-        backgroundColor: '#5a5a5a'
-    }),
-    indicatorsContainer: (provided) => ({
-        ...provided,
-        color: '#ddd',
-        backgroundColor: '#5a5a5a'
-    }),
-};
 
 const DEFAULT_MONSTER = {
     name: null,
@@ -116,7 +99,6 @@ function renderSlotSelector(type, options, equips, onEquipChange) {
         <div key={type} className="margin-tb">
             <img src={`/images/${type}_slot.png`} alt={`${type} slot`} />
             <Select
-                styles={reactSelectStyles}
                 isClearable
                 isDisabled={type==="shield" && equips.weapon?.two_handed}
                 className="equipment-slot"
@@ -176,7 +158,6 @@ function App() {
                     {renderSlotSelector('weapon', slotOptions.weapon, equips, onEquipChange)}
                     <div className="margin-tb">
                         <Select
-                            styles={reactSelectStyles}
                             isClearable
                             className="equipment-slot"
                             placeholder={`Select Attack Style...`}
@@ -190,7 +171,6 @@ function App() {
                 <div className='col-md-6'>
                     <ResultsPanel equips={equips} stats={stats} monster={monster} />
                     <Select
-                        styles={reactSelectStyles}
                         isClearable
                         className="equipment-slot margin-tb"
                         placeholder={`Select Enemy...`}
