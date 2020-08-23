@@ -20,7 +20,7 @@ function IdSelect({value, options, onChange, ...rest}) {
 function PlayerStats({stats, onStatChange}) {
     return (
         <div>
-            <div className="margin-tb">
+            <div>
                 <Container>
                     <Row>
                         <Col className="noPadding" lg="2">
@@ -54,7 +54,7 @@ function PlayerStats({stats, onStatChange}) {
                     </Row>
                 </Container>
             </div>
-            <div className="margin-tb">
+            <div>
                 <Container>
                     <Row>
                         <Col className="noPadding" lg="2">
@@ -87,7 +87,7 @@ function PlayerStats({stats, onStatChange}) {
                     </Row>
                 </Container>
             </div>
-            <div className="margin-tb">
+            <div>
                 <Container>
                     <Row>
                         <Col className="noPadding" lg="2">
@@ -109,7 +109,7 @@ function PlayerStats({stats, onStatChange}) {
                     </Row>
                 </Container>
             </div>
-            <div className="margin-tb">
+            <div>
                 <Container>
                     <Row>
                         <Col className="noPadding" lg="2">

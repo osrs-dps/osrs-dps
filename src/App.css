@@ -1,15 +1,15 @@
 
+.equipment-row {
+  display: flex
+}
+
 .equipment-slot {
   padding-top: 3px;
   padding-bottom: 3px;
-  width: 300px;
+
   text-align-last: center;
   display: inline-block;
-}
-
-.margin-tb {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  flex-grow: 100;
 }
 
 .equipment-wrapper {

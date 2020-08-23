@@ -96,7 +96,7 @@ function renderSlotSelector(type, options, equips, onEquipChange) {
     const attBonusField = ATTACK_STYLE_MAP[styleType];
     const strBonusField = STRENGTH_STYLE_MAP[styleType];
     return (
-        <div key={type} className="margin-tb">
+        <div key={type} className='equipment-row'>
             <img src={`/images/${type}_slot.png`} alt={`${type} slot`} />
             <Select
                 isClearable
@@ -156,11 +156,12 @@ function App() {
             <div className='row'>
                 <div className='col-md-4'>
                     {renderSlotSelector('weapon', slotOptions.weapon, equips, onEquipChange)}
-                    <div className="margin-tb">
+                    <div className='equipment-row'>
+                        <img src='/images/attack_styles.png' alt='attack style' />
                         <Select
                             isClearable
                             className="equipment-slot"
-                            placeholder={`Select Attack Style...`}
+                            placeholder={`Select attack style...`}
                             options={availableAttackStyles}
                             value={equips.attackStyle}
                             onChange={style => setEquips({...equips, attackStyle: style})}
@@ -172,8 +173,7 @@ function App() {
                     <ResultsPanel equips={equips} stats={stats} monster={monster} />
                     <Select
                         isClearable
-                        className="equipment-slot margin-tb"
-                        placeholder={`Select Enemy...`}
+                        placeholder='Select Enemy...'
                         options={monsterOptions}
                         value={monsterOptions && monsterOptions.name}
                         onChange={monsterId => onMonsterChange(monsterId)}
@@ -181,7 +181,7 @@ function App() {
                     <MonsterPanel monster={monster} />
                     <PlayerStats stats={stats} onStatChange={onStatChange} />
                 </div>
-                <div className='col-md-3'>
+                <div className='col-md-2'>
                     &nbsp;
                 </div>
             </div>
