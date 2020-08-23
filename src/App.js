@@ -9,6 +9,7 @@ import PlayerStats from './components/PlayerStats';
 import ResultsPanel from './components/ResultsPanel';
 import MonsterPanel from './components/MonsterPanel';
 import GearSelector from './components/GearSelector';
+import { useArrayState } from './lib/custom_hooks';
 
 import { SLOT_NAMES } from './lib/constants';
 
@@ -62,9 +63,9 @@ const DEFAULT_STATS = {
 const monsterOptions = parseJSONSelector(monsterData);
 
 function parseJSONSelector(slot){
-    var ret = []
+    var ret = [];
     for(var i = 0 ; i < slot.length ; i++){
-        ret[i] = {value: slot[i].name, label: slot[i].name}
+        ret[i] = {value: slot[i].name, label: slot[i].name};
     }
     return ret;
 }
@@ -78,8 +79,9 @@ DEFAULT_EQUIPS.attackStyle = null;
 function App() {
 
     const [equips, setEquips] = useState(DEFAULT_EQUIPS);
+    // useArrayState
     const [stats, setStats] = useState(DEFAULT_STATS);
-    const [monster, setMonster] = useState(DEFAULT_MONSTER)
+    const [monster, setMonster] = useState(DEFAULT_MONSTER);
 
     const onMonsterChange = (monsterId) => {
         let monster = DEFAULT_MONSTER;

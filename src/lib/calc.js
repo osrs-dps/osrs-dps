@@ -34,7 +34,7 @@ function calc(stats, equips, monster) {
     const rangedPotion = _.find(BOOSTS.RANGED_POTIONS, {id: stats.rangedPotionId}) || {base: 0, multiplier: 0};
     const rangedPrayer = _.find(BOOSTS.RANGED_PRAYERS, {id: stats.rangedPrayerId}) || {acc: 1, str: 1};
 
-    if(equips.attackStyle?.value?.type === "Ranged"){
+    if(equips.attackStyle?.value?.type === 'Ranged'){
 
         const totalStrBonus = equipTotal(equips, 'range_str');
 
@@ -50,7 +50,7 @@ function calc(stats, equips, monster) {
         const styleAttBonus = {Accurate: 3}[equips.attackStyle?.value?.style] || 0;
 
         const totalAttBonus = _.reduce(SLOT_NAMES, (total, key) => {
-            return total + (equips[key]? parseInt(equips[key]["range_att"]) : 0);
+            return total + (equips[key]? parseInt(equips[key]['range_att']) : 0);
         }, 0);
 
         const attPotionBonus = potionBuff(stats.ranged, rangedPotion);
@@ -79,7 +79,7 @@ function calc(stats, equips, monster) {
 
         // "attack speed" is (10 - weapon_tick_interval)
         // for example, whip = 4 tick interval, so the attack speed is (10-4) = 6
-        const attackSpeed = (equips.attackStyle?.value?.style === "Rapid") ? equips.weapon?.attack_speed + 1 || 6 :equips.weapon?.attack_speed || 6
+        const attackSpeed = (equips.attackStyle?.value?.style === 'Rapid') ? equips.weapon?.attack_speed + 1 || 6 :equips.weapon?.attack_speed || 6;
         const tickInterval = 10 - attackSpeed;
         const timeBetweenAttacks = tickInterval * 0.6;
         const dps = hitChance * (maxHit / 2) / timeBetweenAttacks;
@@ -97,7 +97,7 @@ function calc(stats, equips, monster) {
             baseDamage,
         };
     }
-    else if(equips.attackStyle?.value?.type === "Magic"){
+    else if(equips.attackStyle?.value?.type === 'Magic'){
 
     }
     else{
@@ -125,11 +125,6 @@ function calc(stats, equips, monster) {
         const maxHit = baseDamage * specialBonus;
         // todo: dharoks, obsidian, special attack bonuses
 
-
-
-
-
-
         // ########## Attack Calcs ##########
         const attStyleType = ATTACK_STYLE_MAP[equips.attackStyle?.value?.type];
         const styleAttBonus = {Accurate: 3, Controlled: 1}[equips.attackStyle?.value?.style] || 0;
@@ -147,10 +142,6 @@ function calc(stats, equips, monster) {
 
         const maxAttRoll = effectiveAtt * (totalAttBonus + 64) * 1;
         // salve, slayer, arclight, dchb, dhl, wildy weapons, tbow
-
-
-
-
 
         // ########## Enemy Defence Calcs ##########
         const defStyleType = DEFENCE_STYLE_MAP[equips.attackStyle?.value?.type];
@@ -170,7 +161,7 @@ function calc(stats, equips, monster) {
 
         // "attack speed" is (10 - weapon_tick_interval)
         // for example, whip = 4 tick interval, so the attack speed is (10-4) = 6
-        const attackSpeed = equips.weapon?.attack_speed || 6
+        const attackSpeed = equips.weapon?.attack_speed || 6;
         const tickInterval = 10 - attackSpeed;
         const timeBetweenAttacks = tickInterval * 0.6;
         const dps = hitChance * (maxHit / 2) / timeBetweenAttacks;

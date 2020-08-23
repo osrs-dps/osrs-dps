@@ -33,7 +33,7 @@ function ResultsPanel({stats, equips, monster}) {
                 );
             })}
         </div>
-    )
+    );
 }
 
 export default ResultsPanel;

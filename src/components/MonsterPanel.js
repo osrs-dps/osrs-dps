@@ -26,7 +26,7 @@ function MonsterPanel({monster}) {
                 );
             })}
         </div>
-    )
+    );
 }
 
 export default MonsterPanel;

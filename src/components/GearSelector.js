@@ -17,11 +17,10 @@ function getAttackStylesFromWeapon(weapon) {
   return _.find(allAttackStyles, { id: weapon.attack_style_id })?.styles || [];
 }
 
-
 function parseJSONSelector(slot) {
-  var ret = []
+  var ret = [];
   for (var i = 0; i < slot.length; i++) {
-    ret[i] = { value: slot[i].name, label: slot[i].name }
+    ret[i] = { value: slot[i].name, label: slot[i].name };
   }
   return ret;
 }
@@ -40,7 +39,7 @@ function renderSlotSelector(type, equips, onEquipChange) {
       <img src={`/images/${type}_slot.png`} alt={`${type} slot`} />
       <Select
         isClearable
-        isDisabled={type === "shield" && equips.weapon?.two_handed}
+        isDisabled={type === 'shield' && equips.weapon?.two_handed}
         className="equipment-slot"
         placeholder={`Select ${type}...`}
         options={slotOptions[type]}
@@ -60,14 +59,14 @@ export default function ({ equips, setEquips }) {
     if (selected) {
       item = _.find(slotData[type], { name: selected.value });
     }
-    let changeset = { ...equips, [type]: item };
+    const changeset = { ...equips, [type]: item };
 
     if (type === 'weapon') {
       if (item?.two_handed) {
         changeset.shield = null;
       }
       if (equips.weapon?.attack_style_id !== item?.attack_style_id) {
-        changeset.attackStyle = null
+        changeset.attackStyle = null;
       }
     }
     setEquips(changeset);
@@ -81,7 +80,7 @@ export default function ({ equips, setEquips }) {
         <Select
           isClearable
           className="equipment-slot"
-          placeholder={`Select attack style...`}
+          placeholder={'Select attack style...'}
           options={availableAttackStyles}
           value={equips.attackStyle}
           onChange={style => setEquips({ ...equips, attackStyle: style })}
@@ -89,5 +88,5 @@ export default function ({ equips, setEquips }) {
       </div>
       {_.without(SLOT_NAMES, 'weapon').map(type => renderSlotSelector(type, equips, onEquipChange))}
     </div>
-  )
+  );
 };

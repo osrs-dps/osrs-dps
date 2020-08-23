@@ -1,0 +1,43 @@
+{
+  "rules": {
+    "quotes": [2, "single", { "avoidEscape": true }],
+    "linebreak-style": [2, "unix"],
+    "semi": [2, "always"],
+    "comma-dangle": [2, "only-multiline"],
+    "no-console": 0,
+    "no-global-assign": 0,
+    "no-multiple-empty-lines": [2, { "max": 1 }],
+    "prefer-const": [
+      "error",
+      {
+        "destructuring": "any",
+        "ignoreReadBeforeAssign": false
+      }
+    ],
+    "react/prop-types": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-no-target-blank": 0
+  },
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "extends": ["plugin:react/recommended", "prettier"],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": true
+    },
+    "ecmaVersion": 2020
+  },
+  "plugins": ["react", "react-hooks"],
+  "globals": {
+    "process": true,
+    "ga": true,
+    "module": true,
+    "__dirname": true,
+    "require": true
+  }
+}
