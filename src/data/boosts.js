@@ -33,4 +33,13 @@ export default {
         {id: 1, base: 4, multiplier: 0.1, label: "Ranging Potion"},
         {id: 2, base: 6, multiplier: 0.16, label: "Overload (+)"},
     ],
+
+    MAGIC_PRAYERS: [
+        {id: 1, multiplier: 1.05, label: "5% Magic Prayer"},
+    ],
+
+    MAGIC_POTIONS: [
+        {id: 1, base: 1, multiplier: 0.0, label: "1 Magic Level"},
+    ],
+
 };

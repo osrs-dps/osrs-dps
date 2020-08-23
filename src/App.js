@@ -2,24 +2,15 @@ import React, { useState } from 'react';
 import './App.css';
 import slotData from './slot_data';
 import monsterData from './data/monsters.json';
-import allAttackStyles from "./data/attack_styles.json";
 import _ from 'lodash';
 import 'bootstrap/dist/css/bootstrap.css';
 import Select from 'react-select';
 import PlayerStats from './components/PlayerStats';
 import ResultsPanel from './components/ResultsPanel';
 import MonsterPanel from './components/MonsterPanel';
+import GearSelector from './components/GearSelector';
 
-import {
-    SLOT_NAMES,
-    ATTACK_STYLE_MAP,
-    STRENGTH_STYLE_MAP,
-} from './lib/constants';
-
-const slotOptions = _.reduce(SLOT_NAMES, (acc, key) => {
-    return {...acc, [key]: parseJSONSelector(slotData[key])};
-}, {});
-
+import { SLOT_NAMES } from './lib/constants';
 
 const DEFAULT_MONSTER = {
     name: null,
@@ -84,34 +75,6 @@ const DEFAULT_EQUIPS = _.reduce(SLOT_NAMES, (acc, key) => {
 
 DEFAULT_EQUIPS.attackStyle = null;
 
-function getAttackStylesFromWeapon(weapon) {
-    if(!weapon) {
-        return [];
-    }
-    return _.find(allAttackStyles, {id: weapon.attack_style_id})?.styles || [];
-}
-
-function renderSlotSelector(type, options, equips, onEquipChange) {
-    const styleType = equips.attackStyle?.value?.type;
-    const attBonusField = ATTACK_STYLE_MAP[styleType];
-    const strBonusField = STRENGTH_STYLE_MAP[styleType];
-    return (
-        <div key={type} className='equipment-row'>
-            <img src={`/images/${type}_slot.png`} alt={`${type} slot`} />
-            <Select
-                isClearable
-                isDisabled={type==="shield" && equips.weapon?.two_handed}
-                className="equipment-slot"
-                placeholder={`Select ${type}...`}
-                options={options}
-                value={equips[type] && {value: equips[type].name, label: equips[type].name}}
-                onChange={itemId => onEquipChange(itemId, type)}
-            />
-            {styleType && <span>{'        '}str: {equips[type] && equips[type][strBonusField]} - att: {equips[type] && equips[type][attBonusField]}</span>}
-        </div>
-    );
-}
-
 function App() {
 
     const [equips, setEquips] = useState(DEFAULT_EQUIPS);
@@ -126,48 +89,18 @@ function App() {
         setMonster(monster);
     };
 
-    const onEquipChange = (selected, type) => {
-        let item = null;
-        if(selected) {
-            item = _.find(slotData[type], {name: selected.value});
-        }
-        let changeset = {...equips, [type]: item};
-
-        if(type === 'weapon') {
-            if(item?.two_handed) {
-                changeset.shield = null;
-            }
-            if(equips.weapon?.attack_style_id !== item?.attack_style_id) {
-                changeset.attackStyle = null
-            }
-        }
-        setEquips(changeset);
-    };
-
     const onStatChange = (value, type) => {
         setStats({...stats, [type]: value});
     };
-
-    let availableAttackStyles = getAttackStylesFromWeapon(equips.weapon);
 
     return (
 
         <div className="App">
             <div className='row'>
                 <div className='col-md-4'>
-                    {renderSlotSelector('weapon', slotOptions.weapon, equips, onEquipChange)}
-                    <div className='equipment-row'>
-                        <img src='/images/attack_styles.png' alt='attack style' />
-                        <Select
-                            isClearable
-                            className="equipment-slot"
-                            placeholder={`Select attack style...`}
-                            options={availableAttackStyles}
-                            value={equips.attackStyle}
-                            onChange={style => setEquips({...equips, attackStyle: style})}
-                        />
-                    </div>
-                    {_.without(SLOT_NAMES, 'weapon').map(type => renderSlotSelector(type, slotOptions[type], equips, onEquipChange))}
+                    <GearSelector
+                        equips={equips}
+                        setEquips={setEquips} />
                 </div>
                 <div className='col-md-6'>
                     <ResultsPanel equips={equips} stats={stats} monster={monster} />
