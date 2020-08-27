@@ -3,7 +3,9 @@ export default {
     STR_PRAYERS: [
         { id: 1, multiplier: 1.23, label: 'Piety' },
         { id: 2, multiplier: 1.18, label: 'Chivalry' },
-        { id: 3, multiplier: 1.15, label: 'Ultimate Strength' },
+        { id: 3, multiplier: 1.15, label: 'Ultimate Strength (15%)' },
+        { id: 4, multiplier: 1.10, label: 'Superhuman Strength (10%)' },
+        { id: 5, multiplier: 1.05, label: 'Burst of Strength (5%)' },
     ],
 
     STR_POTIONS: [
@@ -15,7 +17,9 @@ export default {
     ATT_PRAYERS: [
         { id: 1, multiplier: 1.20, label: 'Piety' },
         { id: 2, multiplier: 1.15, label: 'Chivalry' },
-        { id: 3, multiplier: 1.15, label: 'Incredible Reflexes' },
+        { id: 3, multiplier: 1.15, label: 'Incredible Reflexes (15%)' },
+        { id: 4, multiplier: 1.10, label: 'Improved Reflexes (10%)' },
+        { id: 5, multiplier: 1.05, label: 'Clarity of Thought (5%)' },
     ],
 
     ATT_POTIONS: [
@@ -26,9 +30,9 @@ export default {
 
     RANGED_PRAYERS: [
         { id: 1, label: 'Rigour', str: 1.23, acc: 1.20 },
-        { id: 2, label: 'Eagle Eye', str: 1.15, acc: 1.15 },
-        { id: 3, label: 'Hawk Eye', str: 1.10, acc: 1.10 },
-        { id: 4, label: 'Sharp Eye', str: 1.05, acc: 1.05 },
+        { id: 2, label: 'Eagle Eye (15%)', str: 1.15, acc: 1.15 },
+        { id: 3, label: 'Hawk Eye (10%)', str: 1.10, acc: 1.10 },
+        { id: 4, label: 'Sharp Eye (5%)', str: 1.05, acc: 1.05 },
     ],
 
     RANGED_POTIONS: [
@@ -39,9 +43,9 @@ export default {
 
     MAGIC_PRAYERS: [
         { id: 1, multiplier: 1.25, label: 'Augury' },
-        { id: 2, multiplier: 1.15, label: 'Mystic  Might' },
-        { id: 3, multiplier: 1.10, label: 'Mystic Lore' },
-        { id: 4, multiplier: 1.05, label: 'Mystic Will' },
+        { id: 2, multiplier: 1.15, label: 'Mystic Might (15%)' },
+        { id: 3, multiplier: 1.10, label: 'Mystic Lore (10%)' },
+        { id: 4, multiplier: 1.05, label: 'Mystic Will (5%)' },
     ],
 
     MAGIC_POTIONS: [

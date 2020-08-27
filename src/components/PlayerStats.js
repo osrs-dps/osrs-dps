@@ -55,32 +55,32 @@ function PlayerStats({stats, onStatChange}) {
             <StatRow
                 title='Attack'
                 statKey='attack'
-                prayers={BOOSTS.ATT_PRAYERS}
                 potions={BOOSTS.ATT_POTIONS}
+                prayers={BOOSTS.ATT_PRAYERS}
                 stats={stats}
                 onStatChange={onStatChange}
             />
             <StatRow
                 title='Strength'
                 statKey='strength'
-                prayers={BOOSTS.STR_POTIONS}
-                potions={BOOSTS.STR_PRAYERS}
+                potions={BOOSTS.STR_POTIONS}
+                prayers={BOOSTS.STR_PRAYERS}
                 stats={stats}
                 onStatChange={onStatChange}
             />
             <StatRow
                 title='Magic'
                 statKey='magic'
-                prayers={BOOSTS.MAGIC_POTIONS}
-                potions={BOOSTS.MAGIC_PRAYERS}
+                potions={BOOSTS.MAGIC_POTIONS}
+                prayers={BOOSTS.MAGIC_PRAYERS}
                 stats={stats}
                 onStatChange={onStatChange}
             />
             <StatRow
                 title='Ranged'
                 statKey='ranged'
-                prayers={BOOSTS.RANGED_POTIONS}
-                potions={BOOSTS.RANGED_PRAYERS}
+                potions={BOOSTS.RANGED_POTIONS}
+                prayers={BOOSTS.RANGED_PRAYERS}
                 stats={stats}
                 onStatChange={onStatChange}
             />
