@@ -15,13 +15,13 @@ function MonsterPanel({monster}) {
     ];
 
     return (
-        <div className="stats">
+        <div className='stats'>
             {monsterStatsIWannaShow.map(field => {
                 const val = monster[field];
                 return (
                     <div key={field}>
-                        <div className="stat-left">{field}</div>
-                        <div className="stat-right">{(_.isNil(val) || val === '') ? 'N/A' : val}</div>
+                        <div className='stat-left'>{field}</div>
+                        <div className='stat-right'>{(_.isNil(val) || val === '') ? 'N/A' : val}</div>
                     </div>
                 );
             })}

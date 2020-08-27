@@ -41,7 +41,7 @@ function renderSlotSelector(type, equips, onEquipChange) {
       <Select
         isClearable
         isDisabled={type === 'shield' && equips.weapon?.two_handed}
-        className="equipment-slot"
+        className='equipment-slot'
         placeholder={`Select ${type}...`}
         options={slotOptions[type]}
         value={equips[type] && { value: equips[type].name, label: equips[type].name }}
@@ -81,7 +81,7 @@ export default function ({ equips, setEquips, remove }) {
         <img src='/images/attack_styles.png' alt='attack style' />
         <Select
           isClearable
-          className="equipment-slot"
+          className='equipment-slot'
           placeholder={'Select attack style...'}
           options={availableAttackStyles}
           value={equips.attackStyle}

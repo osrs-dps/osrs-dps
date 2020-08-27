@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './App.css';
-import slotData from './slot_data';
 import monsterData from './data/monsters.json';
 import _ from 'lodash';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -97,7 +96,7 @@ function App() {
 
     return (
 
-        <div className="App">
+        <div className='App'>
             <div className='row'>
                 <div className='col-md-6'>
                     <Select
@@ -111,18 +110,18 @@ function App() {
                 </div>
                 <div className='col-md-6'>
                     <PlayerStats stats={stats} onStatChange={onStatChange} />
-                    <div className="checkbox-wrapper">
-                        <div className="">
-                            <label className="checkbox-label" htmlFor="wild">Wilderness</label>
-                            <input className="checkbox" type="checkbox" id="wild"></input>
+                    <div className='checkbox-wrapper'>
+                        <div className=''>
+                            <label className='checkbox-label' htmlFor='wild'>Wilderness</label>
+                            <input className='checkbox' type='checkbox' id='wild'></input>
                         </div>
-                        <div className="">
-                            <label className="checkbox-label" htmlFor="kandarin">Kandarin</label>
-                            <input className="checkbox" type="checkbox" id="kandarin"></input>
+                        <div className=''>
+                            <label className='checkbox-label' htmlFor='kandarin'>Kandarin</label>
+                            <input className='checkbox' type='checkbox' id='kandarin'></input>
                         </div>
-                        <div className="">
-                            <label className="checkbox-label" htmlFor="dwh">Dragon warhammer</label>
-                            <input className="checkbox" type="checkbox" id="dwh"></input>
+                        <div className=''>
+                            <label className='checkbox-label' htmlFor='dwh'>Dragon warhammer</label>
+                            <input className='checkbox' type='checkbox' id='dwh'></input>
                         </div>
                     </div>
                 </div>

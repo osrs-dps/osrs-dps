@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Row, Col, Form, InputGroup} from 'react-bootstrap';
+import {Row, Col, Form, InputGroup} from 'react-bootstrap';
 import Select from 'react-select';
 import BOOSTS from '../data/boosts';
 import _ from 'lodash';
@@ -17,132 +17,73 @@ function IdSelect({value, options, onChange, ...rest}) {
     );
 }
 
+function StatRow({ title, stats, onStatChange, statKey, potions, prayers }) {
+    return (
+        <Row>
+            <Col className='noPadding' lg='2'>
+                <InputGroup>
+                    <InputGroup.Prepend>
+                        <InputGroup.Text>{title}</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <Form.Control
+                        type='number'
+                        className='stat-input'
+                        value={stats[statKey]}
+                        onChange={e => onStatChange(parseInt(e.target.value), statKey)}
+                    />
+                </InputGroup>
+            </Col>
+            <Col lg='3'><IdSelect
+                isClearable
+                placeholder={`${title} Potion`}
+                options={potions}
+                onChange={id => onStatChange(id, `${statKey}PotionId`)}
+            /></Col>
+            <Col lg='3'><IdSelect
+                isClearable
+                placeholder={`${title} Prayer`}
+                options={prayers}
+                onChange={id => onStatChange(id, `${statKey}PrayerId`)}
+            /></Col>
+        </Row>
+    );
+}
+
 function PlayerStats({stats, onStatChange}) {
     return (
         <div>
-            <div>
-                <Container>
-                    <Row>
-                        <Col className="noPadding" lg="2">
-                            <InputGroup>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text id="basic-addon3">
-                                        Attack
-                                    </InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <Form.Control
-                                    type="number"
-                                    className="stat-input"
-                                    id="attack"
-                                    value={stats.attack}
-                                    onChange={e => onStatChange(parseInt(e.target.value), 'attack')}
-                                />
-                            </InputGroup>
-                        </Col>
-                        <Col lg="3"><IdSelect
-                            isClearable
-                            placeholder='Attack Potion'
-                            options={BOOSTS.ATT_POTIONS}
-                            onChange={id => onStatChange(id, 'attackPotionId')}
-                        /></Col>
-                        <Col lg="3"><IdSelect
-                            isClearable
-                            placeholder='Attack Prayer'
-                            options={BOOSTS.ATT_PRAYERS}
-                            onChange={id => onStatChange(id, 'attackPrayerId')}
-                        /></Col>
-                    </Row>
-                </Container>
-            </div>
-            <div>
-                <Container>
-                    <Row>
-                        <Col className="noPadding" lg="2">
-                            <InputGroup>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text id="basic-addon3">
-                                        Strength
-                                    </InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <Form.Control className="stat-input"
-                                    type="number"
-                                    id="str"
-                                    value={stats.strength}
-                                    onChange={e => onStatChange(parseInt(e.target.value), 'strength')}
-                                />
-                            </InputGroup>
-                        </Col>
-                        <Col lg="3"><IdSelect
-                            isClearable
-                            placeholder='Strength Potion'
-                            options={BOOSTS.STR_POTIONS}
-                            onChange={id => onStatChange(id, 'strengthPotionId')}
-                        /></Col>
-                        <Col lg="3"><IdSelect
-                            isClearable
-                            placeholder='Strength Prayer'
-                            options={BOOSTS.STR_PRAYERS}
-                            onChange={id => onStatChange(id, 'strengthPrayerId')}
-                        /></Col>
-                    </Row>
-                </Container>
-            </div>
-            <div>
-                <Container>
-                    <Row>
-                        <Col className="noPadding" lg="2">
-                            <InputGroup>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text id="basic-addon3">
-                                        Magic
-                                    </InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <Form.Control
-                                    className="stat-input"
-                                    type="number"
-                                    id="magic"
-                                    value={stats.magic}
-                                    onChange={e => onStatChange(parseInt(e.target.value), 'magic')}
-                                />
-                            </InputGroup>
-                        </Col>
-                    </Row>
-                </Container>
-            </div>
-            <div>
-                <Container>
-                    <Row>
-                        <Col className="noPadding" lg="2">
-                            <InputGroup>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text id="basic-addon3">
-                                        Ranged
-                                    </InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <Form.Control
-                                    className="stat-input"
-                                    type="number"
-                                    id="ranged"
-                                    value={stats.ranged}
-                                    onChange={e => onStatChange(parseInt(e.target.value), 'ranged')}
-                                />
-                            </InputGroup>
-                        </Col>
-                        <Col lg="3"><IdSelect
-                            isClearable
-                            options={BOOSTS.RANGED_POTIONS}
-                            placeholder='Ranged Potion'
-                            onChange={id => onStatChange(id, 'rangedPotionId')}
-                        /></Col>
-                        <Col lg="3"><IdSelect
-                            isClearable
-                            options={BOOSTS.RANGED_PRAYERS}
-                            placeholder='Ranged Prayer'
-                            onChange={id => onStatChange(id, 'rangedPrayerId')}
-                        /></Col>
-                    </Row>
-                </Container>
-            </div>
+            <StatRow
+                title='Attack'
+                statKey='attack'
+                prayers={BOOSTS.ATT_PRAYERS}
+                potions={BOOSTS.ATT_POTIONS}
+                stats={stats}
+                onStatChange={onStatChange}
+            />
+            <StatRow
+                title='Strength'
+                statKey='strength'
+                prayers={BOOSTS.STR_POTIONS}
+                potions={BOOSTS.STR_PRAYERS}
+                stats={stats}
+                onStatChange={onStatChange}
+            />
+            <StatRow
+                title='Magic'
+                statKey='magic'
+                prayers={BOOSTS.MAGIC_POTIONS}
+                potions={BOOSTS.MAGIC_PRAYERS}
+                stats={stats}
+                onStatChange={onStatChange}
+            />
+            <StatRow
+                title='Ranged'
+                statKey='ranged'
+                prayers={BOOSTS.RANGED_POTIONS}
+                potions={BOOSTS.RANGED_PRAYERS}
+                stats={stats}
+                onStatChange={onStatChange}
+            />
         </div>
     );
 

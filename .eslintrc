@@ -1,6 +1,7 @@
 {
   "rules": {
     "quotes": [2, "single", { "avoidEscape": true }],
+    "jsx-quotes": [2, "prefer-single"],
     "linebreak-style": [2, "unix"],
     "semi": [2, "always"],
     "comma-dangle": [2, "only-multiline"],
@@ -33,6 +34,11 @@
     "ecmaVersion": 2020
   },
   "plugins": ["react", "react-hooks"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "globals": {
     "process": true,
     "ga": true,

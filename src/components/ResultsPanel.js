@@ -19,7 +19,7 @@ function ResultsPanel({stats, equips, monster}) {
     ];
 
     return (
-        <div className="stats">
+        <div className='stats'>
             {rows.map(row => {
                 let stat = calculations[row.field];
                 if(row.round && stat.toFixed) {
@@ -27,8 +27,8 @@ function ResultsPanel({stats, equips, monster}) {
                 }
                 return (
                     <div key={row.label}>
-                        <div className="stat-left">{row.label}</div>
-                        <div className="stat-right">{stat}</div>
+                        <div className='stat-left'>{row.label}</div>
+                        <div className='stat-right'>{stat}</div>
                     </div>
                 );
             })}
